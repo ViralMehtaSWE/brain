@@ -10,4 +10,4 @@ tags:
 
 # Rahul Banerji
 
-- [relation] Best friend of Viral Mehta #friend #best-friend
+- [relation] Best friend of [[Viral Mehta]] #friend #best-friend
