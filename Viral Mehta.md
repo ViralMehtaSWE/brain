@@ -12,7 +12,7 @@ tags:
 
 # Viral Mehta
 
-Senior Software Engineer & Tech Lead specializing in core distributed storage infrastructure, high-availability architecture, and low-latency systems (8+ years experience).
+Incoming Staff Software Engineer at LinkedIn; Senior Software Engineer & Tech Lead specializing in core distributed storage infrastructure, high-availability architecture, and low-latency systems (8+ years experience).
 
 - [contact] Email: virmht@gmail.com | Phone: +91-8830275348 #contact
 - [education] B.E. in Computer Science from BITS Pilani, Hyderabad (Aug 2014 – May 2018), GPA: 8.33/10.0 #education
