@@ -46,12 +46,12 @@ Created `.gitignore` in `~/.brain/brain` to prevent Obsidian's volatile workspac
 
 ---
 
-## 4. Auto-Pull Script (Pre-Prompt Invocation)
+## 4. Auto-Pull Script (Session Startup)
 
 **Path:** `~/.gemini/scripts/obsidian_git_pull.sh`
 
 **Logic:**
-1. Runs `git fetch origin` before every user prompt.
+1. Runs `git fetch origin` once at conversation session startup (`SessionStart`).
 2. Compares local `HEAD` against remote tracking branch (`origin/main`).
 3. If new commits exist on remote:
    - Fast-forwards / pulls latest changes: `git pull --ff-only`
@@ -85,7 +85,7 @@ Created `.gitignore` in `~/.brain/brain` to prevent Obsidian's volatile workspac
     ]
   },
   "obsidian-vault-pull": {
-    "PreInvocation": [
+    "SessionStart": [
       {
         "type": "command",
         "command": "/Users/viralmehta/.gemini/scripts/obsidian_git_pull.sh",
