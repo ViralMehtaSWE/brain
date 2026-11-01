@@ -12,7 +12,7 @@ tags:
 
 # Basic Memory and Git Auto-Sync Setup
 
-Summary of the system configuration connecting Obsidian, Basic Memory, and Antigravity lifecycle hooks for automated Git backups.
+Summary of the system configuration connecting Obsidian, Basic Memory, and Antigravity lifecycle hooks for automated bidirectional Git synchronization.
 
 ---
 
@@ -31,7 +31,7 @@ Created `.gitignore` in `~/.brain/brain` to prevent Obsidian's volatile workspac
 
 ---
 
-## 3. Auto-Sync Script
+## 3. Auto-Push Script (Post-Tool Execution)
 
 **Path:** `~/.gemini/scripts/obsidian_git_sync.sh`
 
@@ -46,12 +46,52 @@ Created `.gitignore` in `~/.brain/brain` to prevent Obsidian's volatile workspac
 
 ---
 
-## 4. Antigravity Lifecycle Hooks
+## 4. Auto-Pull Script (Pre-Prompt Invocation)
+
+**Path:** `~/.gemini/scripts/obsidian_git_pull.sh`
+
+**Logic:**
+1. Runs `git fetch origin` before every user prompt.
+2. Compares local `HEAD` against remote tracking branch (`origin/main`).
+3. If new commits exist on remote:
+   - Fast-forwards / pulls latest changes: `git pull --ff-only`
+   - Triggers background re-indexing of Basic Memory (`uvx basic-memory project index obsidian --no-wait`)
+   - Injects an ephemeral notice to the agent: `"Notice: Pulled latest changes from remote for Obsidian vault (~/.brain/brain)."`
+4. If already up to date:
+   - Exits cleanly returning `{"injectSteps": []}`.
+
+---
+
+## 5. Antigravity Lifecycle Hooks
 
 **Configured in:**
 - `~/.gemini/config/hooks.json`
 - `~/.gemini/config/plugins/obsidian/hooks.json`
 
-**Event:** `PostToolUse`
-- **Matcher:** `write_file|edit_file|call_mcp_tool`
-- **Action:** Runs `obsidian_git_sync.sh` after any file creation, file edit, or Basic Memory note change.
+```json
+{
+  "obsidian-vault-sync": {
+    "PostToolUse": [
+      {
+        "matcher": "write_file|edit_file|call_mcp_tool",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/viralmehta/.gemini/scripts/obsidian_git_sync.sh",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  },
+  "obsidian-vault-pull": {
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "/Users/viralmehta/.gemini/scripts/obsidian_git_pull.sh",
+        "timeout": 15
+      }
+    ]
+  }
+}
+```
