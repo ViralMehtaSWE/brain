@@ -5,8 +5,9 @@ permalink: obsidian/rahul-banerji
 tags:
 - person
 - friend
+- best-friend
 ---
 
 # Rahul Banerji
 
-- [relation] Friend of Viral Mehta #friend
+- [relation] Best friend of Viral Mehta #friend #best-friend
