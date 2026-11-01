@@ -22,6 +22,11 @@ Senior Software Engineer & Tech Lead specializing in core distributed storage in
 
 ## Work History
 
+### LinkedIn (Upcoming)
+**Staff Software Engineer**
+- [role] Incoming Staff Software Engineer at LinkedIn #linkedin #work-history #career-milestone
+- [status] Joining soon as Staff SWE.
+
 ### Stripe (Nov 2023 – Present) | Bangalore, India
 **Senior Software Engineer (L3, Tech Lead)**
 - [role] Senior Software Engineer and Tech Lead at Stripe driving core distributed storage infrastructure #stripe #work-history
