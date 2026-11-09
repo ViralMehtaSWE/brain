@@ -48,7 +48,7 @@ Created `.gitignore` in `~/.brain/brain` to prevent Obsidian's volatile workspac
 
 ## 4. Auto-Pull Script (Session Startup)
 
-**Path:** `~/.gemini/scripts/obsidian_git_pull.sh`
+**Path:** `~/.gemini/scripts/obsidian_git_pull.sh` (archived in vault at `scripts/obsidian_git_pull.sh`)
 
 **Logic:**
 1. Runs non-interactive `git fetch origin` once at conversation session startup (`SessionStart`).
