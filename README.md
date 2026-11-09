@@ -30,6 +30,7 @@ A personal knowledge management (PKM) vault and long-term semantic memory system
 | :--- | :--- |
 | [Welcome to Brain.md](Welcome%20to%20Brain.md) | High-level vault introduction and welcome note. |
 | [Basic Memory and Git Auto-Sync Setup.md](Basic%20Memory%20and%20Git%20Auto-Sync%20Setup.md) | Technical setup of the Basic Memory MCP and lifecycle hook scripts. |
+| [CLI Status Line Setup.md](CLI%20Status%20Line%20Setup.md) | Unified status line script and configuration across AGY, Claude Code, and Codex. |
 | [cmux and Terminal CLI Integration.md](cmux%20and%20Terminal%20CLI%20Integration.md) | Shell wrappers and precmd hook setup for CLI permissions across cmux & iTerm2. |
 | [Viral Mehta.md](Viral%20Mehta.md) | Personal profile, career timeline (Stripe, Amazon, Google, Microsoft, incoming Staff SWE at LinkedIn), skills, and contact details. |
 | [Rahul Banerji.md](Rahul%20Banerji.md) | Contact note and relation record (best friend). |
