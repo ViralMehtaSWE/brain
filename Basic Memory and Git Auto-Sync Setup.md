@@ -51,12 +51,12 @@ Created `.gitignore` in `~/.brain/brain` to prevent Obsidian's volatile workspac
 **Path:** `~/.gemini/scripts/obsidian_git_pull.sh`
 
 **Logic:**
-1. Runs `git fetch origin` once at conversation session startup (`SessionStart`).
+1. Runs non-interactive `git fetch origin` once at conversation session startup (`SessionStart`).
 2. Compares local `HEAD` against remote tracking branch (`origin/main`).
 3. If new commits exist on remote:
-   - Fast-forwards / pulls latest changes: `git pull --ff-only`
-   - Triggers background re-indexing of Basic Memory (`uvx basic-memory project index obsidian --no-wait`)
-   - Injects an ephemeral notice to the agent: `"Notice: Pulled latest changes from remote for Obsidian vault (~/.brain/brain)."`
+   - Pulls remote changes using `--autostash` (`git pull --ff-only --autostash` or `git pull --rebase --autostash`), safeguarding unstaged local edits.
+   - If conflicts or errors occur, injects an explicit warning/error notice via `injectSteps` with the full Git output (never silent).
+   - If clean, triggers background re-indexing of Basic Memory (`uvx basic-memory project index obsidian --no-wait`) and injects a notice.
 4. If already up to date:
    - Exits cleanly returning `{"injectSteps": []}`.
 
