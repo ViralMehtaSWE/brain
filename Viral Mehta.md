@@ -17,6 +17,7 @@ Incoming Staff Software Engineer at LinkedIn; Senior Software Engineer & Tech Le
 - [contact] Email: virmht@gmail.com | Phone: +91-8830275348 #contact
 - [education] B.E. in Computer Science from BITS Pilani, Hyderabad (Aug 2014 – May 2018), GPA: 8.33/10.0 #education
 - [publication] Published IEEE paper: "Monitoring Cloud Service Unreachability at Scale" (Microsoft Research) #research #ieee
+- [family] Brother: [[Manav Mehta]] #family #brother
 
 ---
 
