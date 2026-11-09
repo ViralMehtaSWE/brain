@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "explain-diff-html": {
+      "source": "adamtait/dotfiles",
+      "sourceType": "github",
+      "skillPath": "home/private_dot_claude/skills/explain-diff-html/SKILL.md",
+      "computedHash": "9dd0c2827cc30e3ca59cc81ed05abd015f75865910ee379a20b7df22b3a83e9f"
+    }
+  }
+}
