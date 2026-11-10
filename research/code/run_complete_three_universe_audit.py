@@ -21,12 +21,13 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.inspection import permutation_importance
 
 try:
-    from config import CACHE_DIR, UNIVERSE_CSV, DATA_DIR
+    from config import CACHE_DIR, UNIVERSE_CSV, DATA_DIR, CALIBRATION_JSON
     SCRATCH_DIR = DATA_DIR
 except ImportError:
     SCRATCH_DIR = "/Users/viralmehta/.gemini/antigravity-cli/brain/7d4b83c2-c66a-4f9e-8a3b-9192a3ba2d22/scratch"
     CACHE_DIR = os.path.join(SCRATCH_DIR, "screener_cache")
     UNIVERSE_CSV = os.path.join(SCRATCH_DIR, "nifty_250_universe.csv")
+    CALIBRATION_JSON = os.path.join(SCRATCH_DIR, "audited_three_universes_calibration.json")
 
 
 def clean_num(val_str):
