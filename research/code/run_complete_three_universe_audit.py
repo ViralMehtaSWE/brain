@@ -77,9 +77,9 @@ def extract_panel_for_universe(symbols, universe_name):
         cf, cf_periods = parse_section(html, 'cash-flow')
         rt, rt_periods = parse_section(html, 'ratios')
         
-        sales_key = 'Sales' if 'Sales' in pl else ('Revenue' if 'Revenue' in pl else None)
-        pat_key = 'Net Profit' if 'Net Profit' in pl else None
-        if not sales_key or not pat_key:
+        sales_key = 'Sales' if 'Sales' in pl else ('Revenue' if 'Revenue' in pl else ('Interest Earned' if 'Interest Earned' in pl else ('Financing Profit' if 'Financing Profit' in pl else None)))
+        pat_key = 'Net Profit' if 'Net Profit' in pl else ('Profit after tax' if 'Profit after tax' in pl else None)
+        if not pat_key:
             continue
             
         pl_by_yr = {p: {k: v[i] if i < len(v) else np.nan for k, v in pl.items()} for i, p in enumerate(pl_periods)}
