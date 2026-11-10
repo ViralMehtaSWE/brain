@@ -70,9 +70,11 @@ The data originates exclusively from authoritative Indian equity market sources:
 
 ## 3. Data Governance & Hygiene Standards
 
-1. **Zero Hallucination Guarantee:** No synthetic data, proxy substitutions, or simulated financial numbers are used. If an unlisted entity (`TMPV`, `TATACAP`) lacks live exchange prices, it is recorded as missing and excluded via the History Qualification Gate.
-2. **Winsorization:** Extreme outlier ratios are winsorized to the 2nd and 98th percentiles within each index universe to prevent distortion from distress-level accounting noise.
-3. **P/E Multiples:** Capped at 150x with a valuation drag penalty applied for stocks trading above 75x P/E.
+1. **Zero Synthetic Data Guarantee:** Strictly NO synthetic data, proxy substitutions, or simulated numbers are generated. All calculations use authentic Screener.in parsed statements and real market prices.
+2. **Insufficient Data Exclusion:** Stocks with insufficient price history (< 2.8 years), short financial reporting (< 3 years), missing valuation ratios, or negative net worth (distressed) are strictly ignored and excluded from selection.
+3. **Winsorization:** Extreme outlier ratios are winsorized to the 2nd and 98th percentiles within each index universe to prevent distortion from distress-level accounting noise.
+4. **Valuation Discipline:** P/E is incorporated as an explicit factor (or capped with a penalty), eliminating multiple-inflation distortions.
+
 
 ---
 
