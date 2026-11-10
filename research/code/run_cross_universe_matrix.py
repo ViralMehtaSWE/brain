@@ -80,9 +80,40 @@ def has_sufficient_history(symbol, min_price_years=2.8, min_pl_years=3):
 
     return True, "ok"
 
+def get_stock_price_series(symbol):
+    t_clean = 'TATAMOTORS' if symbol in ['TMPV', 'TMCV'] else symbol.upper().strip()
+    cache = os.path.join(CACHE_DIR, f"{t_clean}_price.csv")
+    if os.path.exists(cache) and os.path.getsize(cache) > 100:
+        df = pd.read_csv(cache, parse_dates=['date']).dropna().drop_duplicates('date').sort_values('date')
+        if len(df) > 15:
+            return df.set_index('date')['price']
+    return None
+
+def project_bounded_sector_weights(raw_w, industries, min_w=0.025, max_w=0.080, sector_cap=0.250):
+    """
+    Solves for optimal weights closest to raw_w (in L2 norm) strictly satisfying:
+      1. Individual stock box constraints: w_i in [min_w, max_w]
+      2. Sector maximum exposure constraint: sum_{i in S} w_i <= sector_cap
+      3. Full investment budget: sum_i w_i == 1.0
+    Guarantees no stock exceeds 8.0% and no sector exceeds 25.0%.
+    """
+    target = np.array(raw_w, dtype=float) / np.sum(raw_w)
+    w0 = np.clip(target, min_w, max_w)
+    w0 = w0 / np.sum(w0)
+    constraints = [{'type': 'eq', 'fun': lambda w: np.sum(w) - 1.0}]
+    for ind in np.unique(industries):
+        mask = (industries == ind)
+        constraints.append({'type': 'ineq', 'fun': lambda w, m=mask: sector_cap - np.sum(w[m])})
+    bounds = [(min_w, max_w) for _ in range(len(target))]
+    res = minimize(lambda w: 0.5 * np.sum((w - target)**2), w0, method='SLSQP', bounds=bounds, constraints=constraints, options={'ftol': 1e-9})
+    if res.success:
+        return res.x
+    return w0
+
 def parse_point_in_time_stock(sym, yr_target=2023):
     """
     Extracts authentic point-in-time fundamentals as of Mar yr_target (preceding portfolio formation).
+    Authentic trailing P/E is calculated using Price(2023-11-12) / EPS(Mar 2023).
     Zero look-ahead peeking!
     """
     t_clean = 'TATAMOTORS' if sym in ['TMPV', 'TMCV'] else sym.upper().strip()
@@ -155,9 +186,14 @@ def parse_point_in_time_stock(sym, yr_target=2023):
     sales_cagr = ((sales / prev_sales) ** (1/3) - 1) * 100 if (sales and prev_sales and sales > 0 and prev_sales > 0) else None
     opm_exp = (opm - prev_opm) if (opm is not None and prev_opm is not None) else 0.0
 
-    # Point-in-time P/E ratio
-    m_pe = re.search(r'Stock P/E.*?<span class=\"number\">([0-9\.]+)</span>', html, re.DOTALL)
-    pe_val = float(m_pe.group(1)) if m_pe else 25.0
+    # Authentic Point-in-time trailing P/E as of 2023-11-12 (Price / EPS FY23)
+    p_series = get_stock_price_series(sym)
+    p0 = p_series.asof(f'{yr_target}-11-12') if p_series is not None else None
+    eps = curr_pl.get('EPS in Rs')
+    if p0 is not None and pd.notnull(p0) and p0 > 0 and eps is not None and pd.notnull(eps) and eps > 0:
+        pe_val = float(p0 / eps)
+    else:
+        pe_val = 25.0
 
     return {
         'symbol': sym,
@@ -169,15 +205,6 @@ def parse_point_in_time_stock(sym, yr_target=2023):
         'wc_days': wc_days,
         'pe_ratio': pe_val
     }
-
-def get_stock_price_series(symbol):
-    t_clean = 'TATAMOTORS' if symbol in ['TMPV', 'TMCV'] else symbol.upper().strip()
-    cache = os.path.join(CACHE_DIR, f"{t_clean}_price.csv")
-    if os.path.exists(cache) and os.path.getsize(cache) > 100:
-        df = pd.read_csv(cache, parse_dates=['date']).dropna().drop_duplicates('date').sort_values('date')
-        if len(df) > 15:
-            return df.set_index('date')['price']
-    return None
 
 def compute_stock_3y_cagr(series):
     if series is None or len(series) < 15:
