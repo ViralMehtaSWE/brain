@@ -117,8 +117,8 @@ def parse_stock_file(ticker):
     roce = ratios.get('ROCE', rt.get('ROCE %', np.nan))
     pe = ratios.get('Stock P/E', np.nan)
     opm = pl.get('OPM %', pl.get('Financing Margin %', np.nan))
-    de = (borrowings / nw) if nw > 0 else 0.0
-    cfo_pat = (cfo / pat) if (cfo is not None and pat and pat > 0) else 1.0
+    de = (borrowings / nw) if nw > 0 else 50.0  # Heavily penalize insolvency (negative net worth)
+    cfo_pat = (cfo / pat) if (cfo is not None and pat and pat > 0) else -1.0  # Penalize loss-makers
     wc = rt.get('Working Capital Days', np.nan)
 
     return {
