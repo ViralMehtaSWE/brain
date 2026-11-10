@@ -91,18 +91,18 @@ python3 ~/.brain/brain/research/code/run_cross_universe_matrix.py
 ===============================================================================================
 RUNNING 3x3 CROSS-UNIVERSE FACTOR TRANSFERABILITY EXPERIMENT
 ===============================================================================================
-Universe: NIFTY 50         | Model: NIFTY 50 Model         | Opt CAGR:  20.62% | EW CAGR:  10.92% | Sharpe: 0.38 | Alpha: +11.78% [BEATS BENCHMARK]
-Universe: NIFTY 50         | Model: NIFTY NEXT 50 Model    | Opt CAGR:  22.13% | EW CAGR:  11.95% | Sharpe: 0.43 | Alpha: +13.29% [BEATS BENCHMARK]
-Universe: NIFTY 50         | Model: NIFTY MIDCAP 150 Model | Opt CAGR:  22.71% | EW CAGR:  13.10% | Sharpe: 0.44 | Alpha: +13.87% [BEATS BENCHMARK]
-Universe: NIFTY NEXT 50    | Model: NIFTY 50 Model         | Opt CAGR:  24.61% | EW CAGR:  17.65% | Sharpe: 0.42 | Alpha:  +7.99% [BEATS BENCHMARK]
-Universe: NIFTY NEXT 50    | Model: NIFTY NEXT 50 Model    | Opt CAGR:  26.07% | EW CAGR:  18.26% | Sharpe: 0.45 | Alpha:  +9.45% [BEATS BENCHMARK]
-Universe: NIFTY NEXT 50    | Model: NIFTY MIDCAP 150 Model | Opt CAGR:  26.72% | EW CAGR:  19.02% | Sharpe: 0.46 | Alpha: +10.10% [BEATS BENCHMARK]
-Universe: NIFTY MIDCAP 150 | Model: NIFTY 50 Model         | Opt CAGR:  42.34% | EW CAGR:  27.35% | Sharpe: 0.83 | Alpha: +23.84% [BEATS BENCHMARK]
-Universe: NIFTY MIDCAP 150 | Model: NIFTY NEXT 50 Model    | Opt CAGR:  46.58% | EW CAGR:  29.49% | Sharpe: 0.80 | Alpha: +28.08% [BEATS BENCHMARK]
-Universe: NIFTY MIDCAP 150 | Model: NIFTY MIDCAP 150 Model | Opt CAGR:  46.42% | EW CAGR:  29.14% | Sharpe: 0.80 | Alpha: +27.92% [BEATS BENCHMARK]
+Universe: NIFTY 50         | Model: NIFTY 50 Model         | Opt CAGR:  15.80% | EW CAGR:  12.70% | Sharpe: 0.27 | Alpha:  +6.96% [BEATS BENCHMARK]
+Universe: NIFTY 50         | Model: NIFTY NEXT 50 Model    | Opt CAGR:  15.62% | EW CAGR:  11.95% | Sharpe: 0.27 | Alpha:  +6.78% [BEATS BENCHMARK]
+Universe: NIFTY 50         | Model: NIFTY MIDCAP 150 Model | Opt CAGR:  17.28% | EW CAGR:  13.10% | Sharpe: 0.30 | Alpha:  +8.44% [BEATS BENCHMARK]
+Universe: NIFTY NEXT 50    | Model: NIFTY 50 Model         | Opt CAGR:  18.92% | EW CAGR:  19.77% | Sharpe: 0.26 | Alpha:  +2.30% [BEATS BENCHMARK]
+Universe: NIFTY NEXT 50    | Model: NIFTY NEXT 50 Model    | Opt CAGR:  19.42% | EW CAGR:  19.03% | Sharpe: 0.28 | Alpha:  +2.80% [BEATS BENCHMARK]
+Universe: NIFTY NEXT 50    | Model: NIFTY MIDCAP 150 Model | Opt CAGR:  19.01% | EW CAGR:  18.93% | Sharpe: 0.26 | Alpha:  +2.39% [BEATS BENCHMARK]
+Universe: NIFTY MIDCAP 150 | Model: NIFTY 50 Model         | Opt CAGR:  23.65% | EW CAGR:  19.85% | Sharpe: 0.42 | Alpha:  +5.15% [BEATS BENCHMARK]
+Universe: NIFTY MIDCAP 150 | Model: NIFTY NEXT 50 Model    | Opt CAGR:  27.41% | EW CAGR:  23.21% | Sharpe: 0.47 | Alpha:  +8.91% [BEATS BENCHMARK]
+Universe: NIFTY MIDCAP 150 | Model: NIFTY MIDCAP 150 Model | Opt CAGR:  29.04% | EW CAGR:  24.12% | Sharpe: 0.50 | Alpha: +10.54% [BEATS BENCHMARK]
 ```
 
-### Step 5: Execute the Master Test Suite (93 Tests)
+### Step 5: Execute the Master Test Suite (124 Tests)
 Run the automated unit test suite covering data integrity, mathematical constraints, and outperformance assertions:
 ```bash
 python3 -m unittest discover -s ~/.brain/brain/research/code/ -p "test_*.py"
@@ -110,9 +110,9 @@ python3 -m unittest discover -s ~/.brain/brain/research/code/ -p "test_*.py"
 
 **Expected Test Output:**
 ```
-.............................................................................................
+............................................................................................................................
 ----------------------------------------------------------------------
-Ran 93 tests in 41.5s
+Ran 124 tests in ~45s
 
 OK
 ```
