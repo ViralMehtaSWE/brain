@@ -15,7 +15,13 @@ import os
 import json
 
 SCRATCH_DIR = "/Users/viralmehta/.gemini/antigravity-cli/brain/7d4b83c2-c66a-4f9e-8a3b-9192a3ba2d22/scratch"
-REBAL_RESULTS = os.path.join(SCRATCH_DIR, "annual_rebalance_results.json")
+try:
+    from config import DATA_DIR
+    REBAL_RESULTS = os.path.join(DATA_DIR, "annual_rebalance_results.json")
+    if not os.path.exists(REBAL_RESULTS):
+        REBAL_RESULTS = os.path.join(SCRATCH_DIR, "annual_rebalance_results.json")
+except Exception:
+    REBAL_RESULTS = os.path.join(SCRATCH_DIR, "annual_rebalance_results.json")
 
 class TestAnnualRebalancing(unittest.TestCase):
 
