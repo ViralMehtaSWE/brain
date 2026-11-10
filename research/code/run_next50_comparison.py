@@ -10,13 +10,23 @@ import sys
 import numpy as np
 import pandas as pd
 
-SCRATCH_DIR = "/Users/viralmehta/.gemini/antigravity-cli/brain/7d4b83c2-c66a-4f9e-8a3b-9192a3ba2d22/scratch"
+try:
+    from config import DATA_DIR, CACHE_DIR
+    SCRATCH_DIR = DATA_DIR
+except ImportError:
+    SCRATCH_DIR = "/Users/viralmehta/.gemini/antigravity-cli/brain/7d4b83c2-c66a-4f9e-8a3b-9192a3ba2d22/scratch"
+    CACHE_DIR = os.path.join(SCRATCH_DIR, "screener_cache")
 
 def analyze_next50():
     fpath = os.path.join(SCRATCH_DIR, "nifty_next_50_df.csv")
     if not os.path.exists(fpath):
-        print("Data not found. Wait for evaluate_next50.py to complete.")
-        return
+        legacy = "/Users/viralmehta/.gemini/antigravity-cli/brain/7d4b83c2-c66a-4f9e-8a3b-9192a3ba2d22/scratch/nifty_next_50_df.csv"
+        if os.path.exists(legacy):
+            fpath = legacy
+        else:
+            from evaluate_next50 import fetch_and_evaluate_next50
+            fetch_and_evaluate_next50()
+
 
     df = pd.read_csv(fpath)
     if len(df) == 0:
