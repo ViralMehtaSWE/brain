@@ -103,39 +103,39 @@ All scripts and documentation in the repository are strictly synchronized to the
 All production files reside in `~/.brain/brain/research/code/` and are fully synchronized on branch `main`:
 
 ### Execution & Engine Scripts
-- [[research/code/config.py|config.py]]: Canonical paths for data, cache, prices, and universe tables.
-- [[research/code/run_cross_universe_matrix.py|run_cross_universe_matrix.py]]: Core 3x3 point-in-time factor transferability engine.
-- [[research/code/run_annual_rebalance_simulation.py|run_annual_rebalance_simulation.py]]: Walk-forward annual rebalance engine with ex-ante score weighting and 20 bps friction.
-- [[research/code/run_complete_three_universe_audit.py|run_complete_three_universe_audit.py]]: Longitudinal econometric calibration with directional IC gating and temporal splits.
-- [[research/code/portfolio_optimizer.py|portfolio_optimizer.py]]: Institutional optimizer (SLSQP Maximum Sharpe, Risk Parity, turnover constraints).
-- [[research/code/nifty250_portfolio_engine.py|nifty250_portfolio_engine.py]]: Production 20-stock portfolio engine with sector constraints ($\le 25\%$).
-- [[research/code/select_nifty250_30stocks.py|select_nifty250_30stocks.py]]: 30-stock portfolio selector enforcing max 4 per industry sector.
-- [[research/code/generate_10_and_30_portfolios.py|generate_10_and_30_portfolios.py]]: Concentrated 10-stock and diversified 30-stock portfolio generator.
-- [[research/code/run_seven_factor_cross_matrix.py|run_seven_factor_cross_matrix.py]]: Seven-factor matrix incorporating continuous P/E valuation feature.
-- [[research/code/run_seven_factor_portfolio_pipeline.py|run_seven_factor_portfolio_pipeline.py]]: 7-factor screening and portfolio generation pipeline.
-- [[research/code/run_multi_period_analysis.py|run_multi_period_analysis.py]]: Longitudinal temporal stability across 1Y, 2Y, and 3Y horizons.
-- [[research/code/run_nifty250_model_comparison.py|run_nifty250_model_comparison.py]]: Head-to-head model comparison across universes.
-- [[research/code/parse_and_extract.py|parse_and_extract.py]]: HTML filing parser for balance sheet, P&L, cash flow, and ratios.
+- [`config.py`](code/config.py): Canonical paths for data, cache, prices, and universe tables.
+- [`run_cross_universe_matrix.py`](code/run_cross_universe_matrix.py): Core 3x3 point-in-time factor transferability engine.
+- [`run_annual_rebalance_simulation.py`](code/run_annual_rebalance_simulation.py): Walk-forward annual rebalance engine with ex-ante score weighting and 20 bps friction.
+- [`run_complete_three_universe_audit.py`](code/run_complete_three_universe_audit.py): Longitudinal econometric calibration with directional IC gating and temporal splits.
+- [`portfolio_optimizer.py`](code/portfolio_optimizer.py): Institutional optimizer (SLSQP Maximum Sharpe, Risk Parity, turnover constraints).
+- [`nifty250_portfolio_engine.py`](code/nifty250_portfolio_engine.py): Production 20-stock portfolio engine with sector constraints ($\le 25\%$).
+- [`select_nifty250_30stocks.py`](code/select_nifty250_30stocks.py): 30-stock portfolio selector enforcing max 4 per industry sector.
+- [`generate_10_and_30_portfolios.py`](code/generate_10_and_30_portfolios.py): Concentrated 10-stock and diversified 30-stock portfolio generator.
+- [`run_seven_factor_cross_matrix.py`](code/run_seven_factor_cross_matrix.py): Seven-factor matrix incorporating continuous P/E valuation feature.
+- [`run_seven_factor_portfolio_pipeline.py`](code/run_seven_factor_portfolio_pipeline.py): 7-factor screening and portfolio generation pipeline.
+- [`run_multi_period_analysis.py`](code/run_multi_period_analysis.py): Longitudinal temporal stability across 1Y, 2Y, and 3Y horizons.
+- [`run_nifty250_model_comparison.py`](code/run_nifty250_model_comparison.py): Head-to-head model comparison across universes.
+- [`parse_and_extract.py`](code/parse_and_extract.py): HTML filing parser for balance sheet, P&L, cash flow, and ratios.
 
 ### Unit Test Suites (18 Suites, 124 Passing Tests)
-- [[research/code/test_annual_rebalancing.py|test_annual_rebalancing.py]]: 5 tests (turnover bounds, dynamic alpha outperformance, equal-weight alpha).
-- [[research/code/test_cross_universe_matrix.py|test_cross_universe_matrix.py]]: 4 tests (3x3 matrix structure, benchmark outperformance).
-- [[research/code/test_portfolio_optimizer.py|test_portfolio_optimizer.py]]: 6 tests (weight conservation, Risk Parity, diversification benefit).
-- [[research/code/test_nifty250_portfolio.py|test_nifty250_portfolio.py]]: 19 tests (sector caps $\le 25\%$, volatility reduction, Sharpe optimality).
-- [[research/code/test_fundamental_alpha.py|test_fundamental_alpha.py]]: 12 tests (end-to-end integration, real Screener HTML parsing, zero synthetic data).
-- [[research/code/test_master_audit_integrity.py|test_master_audit_integrity.py]]: 5 tests (panel extraction, constituent completeness).
-- [[research/code/test_actual_portfolio.py|test_actual_portfolio.py]]: 8 tests (real-world capital allocation, sector diversification).
-- [[research/code/test_nifty250_30stocks.py|test_nifty250_30stocks.py]]: 5 tests (30-stock selection bounds, sector cap).
-- [[research/code/test_nifty250_model_audit.py|test_nifty250_model_audit.py]]: 5 tests (model parameter persistence, factor normalization).
-- [[research/code/test_portfolios_10_and_30.py|test_portfolios_10_and_30.py]]: 4 tests (concentrated 10-stock vs diversified 30-stock).
-- [[research/code/test_seven_factor_pe_model.py|test_seven_factor_pe_model.py]]: 5 tests (P/E feature continuous scaling, valuation clipping).
-- [[research/code/test_regenerated_3x3_matrix_with_pe.py|test_regenerated_3x3_matrix_with_pe.py]]: 5 tests (7-factor cross-universe matrix validation).
-- [[research/code/test_multi_period_transferability.py|test_multi_period_transferability.py]]: 6 tests (1Y, 2Y, 3Y holding window robustness).
-- [[research/code/test_midcap150_complete.py|test_midcap150_complete.py]]: 10 tests (Midcap 150 pipeline verification).
-- [[research/code/test_nifty50_model_on_next50.py|test_nifty50_model_on_next50.py]]: 8 tests (factor transferability to Next 50).
-- [[research/code/test_nifty50_model_on_midcaps.py|test_nifty50_model_on_midcaps.py]]: 8 tests (factor transferability to Midcaps).
-- [[research/code/test_nifty50_on_next50.py|test_nifty50_on_next50.py]]: 5 tests (cross-universe portfolio overlap).
-- [[research/code/test_nifty50_on_midcaps.py|test_nifty50_on_midcaps.py]]: 4 tests (midcap universe qualification).
+- [`test_annual_rebalancing.py`](code/test_annual_rebalancing.py): 5 tests (turnover bounds, dynamic alpha outperformance, equal-weight alpha).
+- [`test_cross_universe_matrix.py`](code/test_cross_universe_matrix.py): 4 tests (3x3 matrix structure, benchmark outperformance).
+- [`test_portfolio_optimizer.py`](code/test_portfolio_optimizer.py): 6 tests (weight conservation, Risk Parity, diversification benefit).
+- [`test_nifty250_portfolio.py`](code/test_nifty250_portfolio.py): 19 tests (sector caps $\le 25\%$, volatility reduction, Sharpe optimality).
+- [`test_fundamental_alpha.py`](code/test_fundamental_alpha.py): 12 tests (end-to-end integration, real Screener HTML parsing, zero synthetic data).
+- [`test_master_audit_integrity.py`](code/test_master_audit_integrity.py): 5 tests (panel extraction, constituent completeness).
+- [`test_actual_portfolio.py`](code/test_actual_portfolio.py): 8 tests (real-world capital allocation, sector diversification).
+- [`test_nifty250_30stocks.py`](code/test_nifty250_30stocks.py): 5 tests (30-stock selection bounds, sector cap).
+- [`test_nifty250_model_audit.py`](code/test_nifty250_model_audit.py): 5 tests (model parameter persistence, factor normalization).
+- [`test_portfolios_10_and_30.py`](code/test_portfolios_10_and_30.py): 4 tests (concentrated 10-stock vs diversified 30-stock).
+- [`test_seven_factor_pe_model.py`](code/test_seven_factor_pe_model.py): 5 tests (P/E feature continuous scaling, valuation clipping).
+- [`test_regenerated_3x3_matrix_with_pe.py`](code/test_regenerated_3x3_matrix_with_pe.py): 5 tests (7-factor cross-universe matrix validation).
+- [`test_multi_period_transferability.py`](code/test_multi_period_transferability.py): 6 tests (1Y, 2Y, 3Y holding window robustness).
+- [`test_midcap150_complete.py`](code/test_midcap150_complete.py): 10 tests (Midcap 150 pipeline verification).
+- [`test_nifty50_model_on_next50.py`](code/test_nifty50_model_on_next50.py): 8 tests (factor transferability to Next 50).
+- [`test_nifty50_model_on_midcaps.py`](code/test_nifty50_model_on_midcaps.py): 8 tests (factor transferability to Midcaps).
+- [`test_nifty50_on_next50.py`](code/test_nifty50_on_next50.py): 5 tests (cross-universe portfolio overlap).
+- [`test_nifty50_on_midcaps.py`](code/test_nifty50_on_midcaps.py): 4 tests (midcap universe qualification).
 
 ---
 
