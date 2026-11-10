@@ -207,12 +207,12 @@ def analyze_factors_and_derive_weights(panel_df, universe_name):
         stats[f]['rf_gini'] = float(rf.feature_importances_[i])
         stats[f]['perm_imp'] = float(max(0.0, perm.importances_mean[i]))
         
-    # Unrounded Weights Derivation: Bayesian shrinkage toward equal-weight prior with bounding [0.05, 0.35]
-    # Prevents degenerate single-factor concentration (~85% in cfo_to_pat) while rewarding positive directional alpha
-    K = len(features)
-    prior_w = 1.0 / K  # Equal-weight prior = 1/6
-
+    # Unrounded Weights Derivation: Directional IC Gating + Bayesian Shrinkage Among Positive Factors
+    # Factors with negative directional correlation are strictly ZEROED OUT (zero wrong-way betting!)
+    # To prevent single-factor concentration in cfo_to_pat, weights are shrunk toward an equal-weight
+    # prior strictly across the subset of positive-IC factors, with ceiling <= 45.0% and floor >= 10.0%.
     raw_empirical = {}
+    pos_factors = []
     for f in features:
         ic_sign = -1.0 if f in ['debt_to_equity', 'wc_days'] else 1.0
         dir_ic = stats[f]['mean_ic'] * ic_sign
@@ -220,25 +220,33 @@ def analyze_factors_and_derive_weights(panel_df, universe_name):
             raw_empirical[f] = 0.0
         else:
             raw_empirical[f] = 0.5 * dir_ic + 0.5 * stats[f]['perm_imp']
+            pos_factors.append(f)
 
+    K_pos = len(pos_factors)
     emp_sum = sum(raw_empirical.values())
-    norm_empirical = {f: raw_empirical[f] / emp_sum for f in features} if emp_sum > 0 else {f: prior_w for f in features}
-    
-    # 50% Bayesian blend between empirical alpha and equal-weight prior
-    blended_w = {f: 0.50 * norm_empirical[f] + 0.50 * prior_w for f in features}
+    emp_w = {f: (raw_empirical[f] / emp_sum if emp_sum > 0 else 0.0) for f in features}
 
-    # Project with bounded constraints: each factor weight wf in [0.05, 0.35]
-    w_arr = np.array([blended_w[f] for f in features])
+    # Positive-factor prior (equal weight strictly among factors with genuine positive directional alpha)
+    prior_w = {f: (1.0 / K_pos if f in pos_factors else 0.0) for f in features}
+
+    # 50% Bayesian blend strictly among positive factors
+    blended_w = {f: (0.50 * emp_w[f] + 0.50 * prior_w[f] if f in pos_factors else 0.0) for f in features}
+
+    # Bounded projection among positive factors: ceiling <= 0.450, floor >= 0.100
+    w_arr = np.array([blended_w[f] for f in pos_factors])
     for _ in range(50):
-        w_arr = np.clip(w_arr, 0.05, 0.35)
+        w_arr = np.clip(w_arr, 0.10, 0.45)
         w_arr = w_arr / np.sum(w_arr)
 
-    unrounded_w = {f: float(w_arr[i]) for i, f in enumerate(features)}
+    unrounded_w = {f: 0.0 for f in features}
+    for i, f in enumerate(pos_factors):
+        unrounded_w[f] = float(w_arr[i])
+
     rounded_w = {f: round(unrounded_w[f], 3) for f in features}
     diff = round(1.0 - sum(rounded_w.values()), 3)
-    top_f = max(rounded_w, key=rounded_w.get)
+    top_f = max(pos_factors, key=lambda x: rounded_w[x])
     rounded_w[top_f] = round(rounded_w[top_f] + diff, 3)
-    
+
     return stats, unrounded_w, rounded_w
 
 def main():

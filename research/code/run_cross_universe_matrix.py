@@ -38,6 +38,13 @@ BENCHMARKS = {
     'NIFTY MIDCAP 150': {'cagr': 0.1850, 'volatility': 0.1820, 'sharpe': 0.6319}
 }
 
+def clean_num(val_str):
+    if val_str is None: return np.nan
+    s = str(val_str).replace('%', '').replace(',', '').strip()
+    if s in ['', '-', 'None', 'N/A']: return np.nan
+    try: return float(s)
+    except: return np.nan
+
 def has_sufficient_history(symbol, min_price_years=2.8, min_pl_years=3):
     """
     Excludes any company that does not possess sufficient historical track record:
@@ -186,11 +193,21 @@ def parse_point_in_time_stock(sym, yr_target=2023):
     sales_cagr = ((sales / prev_sales) ** (1/3) - 1) * 100 if (sales and prev_sales and sales > 0 and prev_sales > 0) else None
     opm_exp = (opm - prev_opm) if (opm is not None and prev_opm is not None) else 0.0
 
-    # Authentic Point-in-time trailing P/E as of 2023-11-12 (Price / EPS FY23)
+    # Authentic Split/Bonus-Invariant Point-in-time trailing P/E as of 2023-11-12
     p_series = get_stock_price_series(sym)
     p0 = p_series.asof(f'{yr_target}-11-12') if p_series is not None else None
     eps = curr_pl.get('EPS in Rs')
-    if p0 is not None and pd.notnull(p0) and p0 > 0 and eps is not None and pd.notnull(eps) and eps > 0:
+    m_mc = re.search(r'Market Cap.*?<span class="number">([0-9,]+)</span>', html, re.DOTALL)
+    m_cp = re.search(r'Current Price.*?<span class="number">([0-9,]+)</span>', html, re.DOTALL)
+    mc_cr = clean_num(m_mc.group(1)) if m_mc else None
+    cp = clean_num(m_cp.group(1)) if m_cp else None
+
+    if mc_cr and cp and cp > 0 and pat and pat > 0 and p0 and p0 > 0:
+        # Split/bonus-invariant: Market Cap(t0) / Net Profit(t0)
+        shares_cr = mc_cr / cp
+        mc_t0 = p0 * shares_cr
+        pe_val = float(mc_t0 / pat)
+    elif p0 is not None and pd.notnull(p0) and p0 > 0 and eps is not None and pd.notnull(eps) and eps > 0:
         pe_val = float(p0 / eps)
     else:
         pe_val = 25.0
@@ -277,7 +294,10 @@ def evaluate_combination(universe_name, model_name, universe_df, model_weights):
             price_dict[sym] = p_series
             stock_cagrs[sym] = compute_stock_3y_cagr(p_series)
 
-    p_df = pd.DataFrame(price_dict).dropna()
+    raw_pdf = pd.DataFrame(price_dict).sort_index()
+    # Explicitly slice over the exact holding window Nov 12, 2023 to Nov 09, 2026
+    sub_df = raw_pdf.loc['2023-11-12':'2026-11-09'].dropna()
+    p_df = sub_df if len(sub_df) > 15 else raw_pdf.dropna()
     valid_syms = list(p_df.columns)
     N = len(valid_syms)
 

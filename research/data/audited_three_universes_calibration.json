@@ -54,20 +54,20 @@
       }
     },
     "unrounded_weights": {
-      "cfo_to_pat": 0.35,
-      "roce": 0.10318600206045354,
-      "hist_sales_cagr": 0.1627159895239607,
-      "opm_expansion_3y": 0.10318600206045354,
-      "debt_to_equity": 0.17772600429467866,
-      "wc_days": 0.10318600206045354
+      "cfo_to_pat": 0.45,
+      "roce": 0.0,
+      "hist_sales_cagr": 0.2674512648222225,
+      "opm_expansion_3y": 0.0,
+      "debt_to_equity": 0.2825487351777775,
+      "wc_days": 0.0
     },
     "rounded_weights": {
-      "cfo_to_pat": 0.35,
-      "roce": 0.103,
-      "hist_sales_cagr": 0.163,
-      "opm_expansion_3y": 0.103,
-      "debt_to_equity": 0.178,
-      "wc_days": 0.103
+      "cfo_to_pat": 0.45,
+      "roce": 0.0,
+      "hist_sales_cagr": 0.267,
+      "opm_expansion_3y": 0.0,
+      "debt_to_equity": 0.283,
+      "wc_days": 0.0
     }
   },
   "NIFTY NEXT 50": {
@@ -125,20 +125,20 @@
       }
     },
     "unrounded_weights": {
-      "cfo_to_pat": 0.35,
-      "roce": 0.0882168276681016,
-      "hist_sales_cagr": 0.17363263958985295,
-      "opm_expansion_3y": 0.13713749884289658,
-      "debt_to_equity": 0.1627962062310473,
-      "wc_days": 0.0882168276681016
+      "cfo_to_pat": 0.4276492722704628,
+      "roce": 0.0,
+      "hist_sales_cagr": 0.2056873758098923,
+      "opm_expansion_3y": 0.1712125277644017,
+      "debt_to_equity": 0.19545082415524323,
+      "wc_days": 0.0
     },
     "rounded_weights": {
-      "cfo_to_pat": 0.35,
-      "roce": 0.088,
-      "hist_sales_cagr": 0.174,
-      "opm_expansion_3y": 0.137,
-      "debt_to_equity": 0.163,
-      "wc_days": 0.088
+      "cfo_to_pat": 0.428,
+      "roce": 0.0,
+      "hist_sales_cagr": 0.206,
+      "opm_expansion_3y": 0.171,
+      "debt_to_equity": 0.195,
+      "wc_days": 0.0
     }
   },
   "NIFTY MIDCAP 150": {
@@ -196,20 +196,20 @@
       }
     },
     "unrounded_weights": {
-      "cfo_to_pat": 0.35,
-      "roce": 0.10740238999608423,
-      "hist_sales_cagr": 0.10740238999608423,
-      "opm_expansion_3y": 0.10740238999608423,
-      "debt_to_equity": 0.15712980892097103,
-      "wc_days": 0.1706630210907764
+      "cfo_to_pat": 0.45,
+      "roce": 0.0,
+      "hist_sales_cagr": 0.0,
+      "opm_expansion_3y": 0.0,
+      "debt_to_equity": 0.2681410804653754,
+      "wc_days": 0.28185891953462455
     },
     "rounded_weights": {
-      "cfo_to_pat": 0.351,
-      "roce": 0.107,
-      "hist_sales_cagr": 0.107,
-      "opm_expansion_3y": 0.107,
-      "debt_to_equity": 0.157,
-      "wc_days": 0.171
+      "cfo_to_pat": 0.45,
+      "roce": 0.0,
+      "hist_sales_cagr": 0.0,
+      "opm_expansion_3y": 0.0,
+      "debt_to_equity": 0.268,
+      "wc_days": 0.282
     }
   }
 }
