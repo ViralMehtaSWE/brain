@@ -297,6 +297,75 @@ class PortfolioOptimizer:
             inv_vols = 1.0 / np.where(diag_vols > 0, diag_vols, 1.0)
             return inv_vols / np.sum(inv_vols)
 
+    def optimize_risk_parity(self, cov_matrix: np.ndarray, min_weight: float = 0.01, max_weight: float = 0.35) -> np.ndarray:
+        """
+        Equal Risk Contribution (Risk-Parity) Optimizer:
+        Allocates weights such that each asset contributes equally to total portfolio variance.
+        Objective: minimize sum_i sum_j (w_i * (Sigma w)_i - w_j * (Sigma w)_j)^2
+        """
+        n = cov_matrix.shape[0]
+        init_weights = np.ones(n) / n
+        bounds = tuple((min_weight, max_weight) for _ in range(n))
+        constraints = ({'type': 'eq', 'fun': lambda w: np.sum(w) - 1.0})
+
+        def risk_parity_objective(w):
+            p_var = np.dot(w.T, np.dot(cov_matrix, w))
+            if p_var <= 1e-12:
+                return 0.0
+            mrc = np.dot(cov_matrix, w) # marginal risk contribution
+            rc = w * mrc # risk contribution
+            rc_target = p_var / n
+            return np.sum((rc - rc_target) ** 2)
+
+        res = minimize(
+            risk_parity_objective,
+            init_weights,
+            method='SLSQP',
+            bounds=bounds,
+            constraints=constraints,
+            options={'ftol': 1e-11, 'maxiter': 500}
+        )
+        if res.success:
+            w = np.maximum(0, res.x)
+            return w / np.sum(w)
+        diag_vols = np.sqrt(np.diag(cov_matrix))
+        inv_vols = 1.0 / np.where(diag_vols > 0, diag_vols, 1.0)
+        return inv_vols / np.sum(inv_vols)
+
+    def apply_turnover_and_costs(
+        self,
+        weights: np.ndarray,
+        prior_weights: Optional[np.ndarray] = None,
+        max_turnover: Optional[float] = None,
+        cost_bps: float = 15.0
+    ) -> Dict[str, Any]:
+        """
+        Enforces turnover constraint and deducts transaction costs (default 15 bps).
+        Turnover = 0.5 * sum(|w - w_prior|)
+        Cost = Turnover * (cost_bps / 10000.0)
+        """
+        if prior_weights is None:
+            return {
+                'weights': weights,
+                'turnover': 0.0,
+                'cost_deduction': 0.0
+            }
+        diff = np.abs(weights - prior_weights)
+        raw_turnover = float(0.5 * np.sum(diff))
+        if max_turnover is not None and raw_turnover > max_turnover:
+            # Scale adjustment toward prior weights to satisfy turnover limit
+            alpha = max_turnover / raw_turnover
+            weights = prior_weights + alpha * (weights - prior_weights)
+            weights = np.maximum(0, weights) / np.sum(np.maximum(0, weights))
+            raw_turnover = float(0.5 * np.sum(np.abs(weights - prior_weights)))
+        cost_deduction = float(raw_turnover * (cost_bps / 10000.0))
+        return {
+            'weights': weights,
+            'turnover': raw_turnover,
+            'cost_deduction': cost_deduction
+        }
+
+
     def construct_portfolio(
         self,
         company_list: List[str],
