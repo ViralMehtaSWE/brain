@@ -126,8 +126,8 @@ def parse_stock_file(ticker: str) -> Dict[str, Any]:
         'hist_sales_cagr_3y': compound.get('Compounded Sales Growth_3 Years', np.nan),
         'stock_price_cagr_3y': compound.get('Stock Price CAGR_3 Years', np.nan),
         'opm': pl.get('OPM %', np.nan),
-        'debt_to_equity': (borrowings / net_worth) if net_worth > 0 else 0.0,
-        'cfo_to_pat': (cfo / pat) if (cfo is not None and pat and pat > 0) else 1.0
+        'debt_to_equity': (borrowings / net_worth) if net_worth > 0 else 50.0,
+        'cfo_to_pat': (cfo / pat) if (cfo is not None and pat and pat > 0) else -1.0
     }
 
 def get_actual_prices(ticker: str, cid: str) -> pd.Series:
