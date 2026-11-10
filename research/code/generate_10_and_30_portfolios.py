@@ -19,9 +19,15 @@ import numpy as np
 import pandas as pd
 from scipy.optimize import minimize
 
-SCRATCH_DIR = "/Users/viralmehta/.gemini/antigravity-cli/brain/7d4b83c2-c66a-4f9e-8a3b-9192a3ba2d22/scratch"
-CACHE_DIR = os.path.join(SCRATCH_DIR, "screener_cache")
-UNIVERSE_CSV = os.path.join(SCRATCH_DIR, "nifty_250_universe.csv")
+try:
+    from config import CACHE_DIR, UNIVERSE_CSV, DATA_DIR, OUTPUT_DIR
+    SCRATCH_DIR = DATA_DIR
+except ImportError:
+    SCRATCH_DIR = "/Users/viralmehta/.gemini/antigravity-cli/brain/7d4b83c2-c66a-4f9e-8a3b-9192a3ba2d22/scratch"
+    CACHE_DIR = os.path.join(SCRATCH_DIR, "screener_cache")
+    UNIVERSE_CSV = os.path.join(SCRATCH_DIR, "nifty_250_universe.csv")
+    OUTPUT_DIR = os.path.join(SCRATCH_DIR, "output")
+
 
 NEXT50_WEIGHTS = {
     'cfo_to_pat': 0.3637039524478158,
