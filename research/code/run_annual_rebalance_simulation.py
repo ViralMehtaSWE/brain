@@ -24,6 +24,7 @@ import re
 import json
 import numpy as np
 import pandas as pd
+from scipy.optimize import minimize
 
 # Portable paths via config
 try:
