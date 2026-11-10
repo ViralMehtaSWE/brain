@@ -354,6 +354,12 @@ def main():
     os.makedirs("/Users/viralmehta/investment/output", exist_ok=True)
     df_10.to_csv("/Users/viralmehta/investment/output/nifty250_top10_stocks.csv", index=False)
     df_30.to_csv("/Users/viralmehta/investment/output/nifty250_top30_stocks.csv", index=False)
+    if 'OUTPUT_DIR' in locals() and os.path.exists(OUTPUT_DIR):
+        df_10.to_csv(os.path.join(OUTPUT_DIR, "nifty250_top10_stocks.csv"), index=False)
+        df_30.to_csv(os.path.join(OUTPUT_DIR, "nifty250_top30_stocks.csv"), index=False)
+    if 'DATA_DIR' in locals() and os.path.exists(DATA_DIR):
+        df_10.to_csv(os.path.join(DATA_DIR, "nifty250_top10_stocks.csv"), index=False)
+        df_30.to_csv(os.path.join(DATA_DIR, "nifty250_top30_stocks.csv"), index=False)
     print("\nSaved output CSVs.")
 
 if __name__ == '__main__':
