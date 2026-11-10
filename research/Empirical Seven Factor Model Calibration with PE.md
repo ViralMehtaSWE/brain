@@ -1,3 +1,9 @@
+---
+permalink: obsidian/research/empirical-seven-factor-model-calibration-with-pe
+title: Empirical Seven Factor Model Calibration with PE
+type: note
+---
+
 # Empirical 7-Factor Model: Longitudinal Calibration of Valuation (P/E Ratio)
 
 **Date:** November 10, 2026  
