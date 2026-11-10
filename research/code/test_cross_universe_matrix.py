@@ -6,6 +6,8 @@ Unit Test Suite for 3x3 Cross-Universe Factor Transferability Matrix
 import unittest
 import os
 import json
+import pandas as pd
+
 
 try:
     from config import DATA_DIR
