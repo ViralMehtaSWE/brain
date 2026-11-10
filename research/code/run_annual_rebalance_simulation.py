@@ -431,7 +431,8 @@ def run_annual_rebalance_simulation():
             stat_cagr_ew = (1 + stat_cum_ew) ** (1.0 / 3.0) - 1.0
 
             # Annual turnover (years 2 and 3 rebalancing)
-            avg_turnover = np.mean(turnover_list[1:]) if len(turnover_list) > 1 else 0.0
+            avg_turnover = float(np.mean(turnover_list[1:])) if len(turnover_list) > 1 else 0.0
+            avg_turnover_ew = float(np.mean(turnover_ew_list[1:])) if len(turnover_ew_list) > 1 else 0.0
 
             rebalance_results[u][m_name] = {
                 "benchmark": {
@@ -448,6 +449,9 @@ def run_annual_rebalance_simulation():
                     "ew_alpha": dyn_cagr_ew - bm_cagr,
                     "y1_opt": dyn_y_rets_opt[0], "y2_opt": dyn_y_rets_opt[1], "y3_opt": dyn_y_rets_opt[2],
                     "avg_turnover": avg_turnover,
+                    "avg_turnover_ew": avg_turnover_ew,
+                    "turnover_annual": [float(t) for t in turnover_list],
+                    "turnover_ew_annual": [float(t) for t in turnover_ew_list],
                     "beats_bm": dyn_cagr_opt > bm_cagr
                 },
                 "static_rebalancing": {
