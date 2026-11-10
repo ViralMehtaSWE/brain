@@ -120,10 +120,10 @@ def extract_panel_for_universe(symbols, universe_name):
             
             borrowings = curr_bs.get('Borrowings', 0) or 0
             net_worth = (curr_bs.get('Equity Capital', 0) or 0) + (curr_bs.get('Reserves', 0) or 0)
-            debt_to_equity = (borrowings / net_worth) if net_worth > 0 else 0.0
+            debt_to_equity = (borrowings / net_worth) if net_worth > 0 else 50.0
             
             cfo = curr_cf.get('Cash from Operating Activity', np.nan)
-            cfo_to_pat = (cfo / pat_t) if (cfo is not None and pat_t and pat_t > 0) else np.nan
+            cfo_to_pat = (cfo / pat_t) if (cfo is not None and pat_t and pat_t > 0) else -1.0
             
             fwd_pat_cagr = ((pat_t_plus_3 / pat_t) ** (1/3) - 1) * 100 if (pat_t_plus_3 and pat_t and pat_t > 0 and pat_t_plus_3 > 0) else np.nan
             
