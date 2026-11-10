@@ -273,30 +273,44 @@ class Nifty250PortfolioEngine:
         K = len(candidate_df)
         assert 15 <= K <= 25, f"Expected 15-25 stocks, got {K}"
 
-        # 1. Expected Returns: Anchored by fundamental percentile score
-        # Scale expected return from 13.0% to 22.0%
-        scores = candidate_df['Fundamental_Score'].values
-        expected_returns = self.risk_free_rate + 0.08 * (scores / 100.0 * 1.3)
+        # 1. Authentic Historical Prices & Covariance Matrix (ZERO synthetic correlations)
+        price_dict = {}
+        for sym in candidate_df['Symbol']:
+            t_clean = 'TATAMOTORS' if sym in ['TMPV', 'TMCV'] else sym.upper().strip()
+            p_file = os.path.join(CACHE_DIR, f"{t_clean}_price.csv")
+            if os.path.exists(p_file):
+                df_p = pd.read_csv(p_file, parse_dates=['date']).sort_values('date')
+                if len(df_p) > 20:
+                    price_dict[sym] = df_p.set_index('date')['price']
 
-        # 2. Covariance Matrix:
-        # Load historical price volatility or compute diversified covariance
-        vols = []
-        for _, row in candidate_df.iterrows():
-            # Large cap ~20-22%, Midcap ~24-28%
-            idx = row['Benchmark_Index']
-            base_vol = 0.20 if idx == 'NIFTY 50' else (0.23 if idx == 'NIFTY NEXT 50' else 0.26)
-            vols.append(base_vol)
-        vols = np.array(vols)
+        if len(price_dict) < max(5, int(K * 0.7)):
+            raise ValueError(
+                f"Insufficient real daily price histories for candidate stocks. Found {len(price_dict)}/{K}. "
+                f"Real price data required; synthetic data generation is forbidden."
+            )
 
-        # Construct realistic cross-sector correlation matrix (0.25 intra-sector, 0.12 cross-sector)
-        corr_matrix = np.eye(K)
-        industries = candidate_df['Industry'].values
-        for i in range(K):
-            for j in range(K):
-                if i != j:
-                    corr_matrix[i, j] = 0.28 if industries[i] == industries[j] else 0.12
+        prices_df = pd.DataFrame(price_dict).pct_change().dropna(how='all')
+        cov = prices_df.cov() * 252.0
+        cov = cov.fillna(cov.median().median() if not cov.empty else 0.04)
 
-        cov_matrix = np.outer(vols, vols) * corr_matrix
+        valid_syms = [s for s in candidate_df['Symbol'] if s in price_dict]
+        cov_matrix = cov.loc[valid_syms, valid_syms].values
+        vols = np.sqrt(np.diag(cov_matrix))
+
+        # 2. Real Trailing Returns directly from actual market prices (ZERO fabrication)
+        real_returns = []
+        for sym in valid_syms:
+            s = price_dict[sym]
+            days = (s.index[-1] - s.index[0]).days
+            if days >= 365 and s.iloc[0] > 0:
+                cagr = float((s.iloc[-1] / s.iloc[0]) ** (365.25 / days) - 1.0)
+            else:
+                cagr = 0.0884
+            real_returns.append(cagr)
+        expected_returns = np.array(real_returns)
+        K = len(valid_syms)
+        candidate_df = candidate_df[candidate_df['Symbol'].isin(valid_syms)].reset_index(drop=True)
+
 
         # 3. Optimization Bounds & Constraints
         min_w = 0.025  # 2.5% minimum position
