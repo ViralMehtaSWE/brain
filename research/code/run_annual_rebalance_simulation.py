@@ -310,14 +310,15 @@ def run_annual_rebalance_simulation():
                 e_d = cycle["end"]
 
                 # 1. Dynamic Point-in-Time Selection
-                curr_top20 = score_and_select_portfolio(u, m_weights, f_yr)
+                curr_top20, scores_dict = score_and_select_portfolio(u, m_weights, f_yr)
                 if static_top20 is None:
                     static_top20 = curr_top20
+                    static_scores_dict = scores_dict
 
                 # 2. Ex-ante Score Weights (No Future Price Peeking!)
-                curr_weights_dyn = compute_ex_ante_weights(curr_top20, u, m_weights, f_yr)
+                curr_weights_dyn = compute_ex_ante_weights(curr_top20, u, scores_dict)
                 if not static_weights:
-                    static_weights = compute_ex_ante_weights(static_top20, u, m_weights, REBALANCE_CYCLES[0]["filing_year"])
+                    static_weights = compute_ex_ante_weights(static_top20, u, static_scores_dict)
 
                 # 3. Two-Way Turnover Calculation: 0.5 * sum(|w_t - w_{t-1}|)
                 if not prev_portfolio_weights:
