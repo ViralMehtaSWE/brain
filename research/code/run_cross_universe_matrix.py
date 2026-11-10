@@ -339,8 +339,18 @@ def main():
             status = "[BEATS BENCHMARK]" if res['beats_benchmark'] else "[LAGGED]"
             print(f"Universe: {u:<16} | Model: {m:<22} | Opt CAGR: {res['opt_cagr']*100:6.2f}% | EW CAGR: {res['ew_cagr']*100:6.2f}% | Sharpe: {res['opt_sharpe']:4.2f} | Alpha: {res['active_alpha']*100:+6.2f}% {status}")
             
-    with open(os.path.join(SCRATCH_DIR, "cross_universe_matrix_results.json"), "w") as f:
-        json.dump(matrix_results, f, indent=2)
+    out_paths = [os.path.join(SCRATCH_DIR, "cross_universe_matrix_results.json")]
+    if 'DATA_DIR' in locals() and DATA_DIR != SCRATCH_DIR:
+        out_paths.append(os.path.join(DATA_DIR, "cross_universe_matrix_results.json"))
+    legacy_path = "/Users/viralmehta/.gemini/antigravity-cli/brain/7d4b83c2-c66a-4f9e-8a3b-9192a3ba2d22/scratch/cross_universe_matrix_results.json"
+    if legacy_path not in out_paths:
+        out_paths.append(legacy_path)
+    for p in out_paths:
+        try:
+            with open(p, "w") as f:
+                json.dump(matrix_results, f, indent=2)
+        except Exception:
+            pass
         
     print("\nResults successfully saved to cross_universe_matrix_results.json.")
 
