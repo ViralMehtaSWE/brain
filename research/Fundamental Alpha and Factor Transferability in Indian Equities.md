@@ -22,9 +22,12 @@ The study answers two foundational questions in quantitative asset management:
 
 ### Core Empirical Discoveries
 - **Universal Cash Conversion Discipline:** Operating Cash Flow / Net Profit (`cfo_to_pat`) is the single most durable fundamental factor across the entire Indian stock market ($p = 0.018$ to $0.026$, receiving 35.6%–36.4% derived weight across all universes).
-- **Scale-Dependent Growth Moats:** In mature large-caps (NIFTY 50), historical sales growth has zero predictive power ($p = 0.81$); however, in NIFTY Next 50, topline sales growth becomes a highly significant alpha driver ($t = +3.57, p = 0.016$, receiving 14.9% weight).
-- **Midcap Operating Leverage:** Margin expansion (`opm_expansion_3y`) commands 3x higher importance in midcaps (12.11% vs 3.73% in N50), reflecting that midcap earnings compounding is predominantly driven by operating leverage.
-- **Durable Factor Transferability:** All 9 combinations in the 3x3 Cross-Universe Matrix beat their passive benchmark index in **both Max-Sharpe Optimized portfolios (+7.99% to +28.08% active alpha)** and **Equal-Weighted baskets (+1.03% to +10.99% active alpha)**.
+- **Valuation Penalty (P/E as Explicit Feature):** P/E is an essential explicit anchor. Without penalizing extreme multiples, portfolios overpay for growth compounders; empirically calibrated models assign `-16.5%` to `-33.4%` negative weight to P/E.
+- **Scale-Dependent Growth Moats:** In mature large-caps (NIFTY 50), historical sales growth has zero predictive power ($p = 0.81$); however, in NIFTY Next 50, topline sales growth becomes a highly significant alpha driver ($t = +3.57, p = 0.016$, receiving 14.9% to 24.6% weight).
+- **Midcap Operating Leverage:** Margin expansion (`opm_expansion_3y`) commands high importance in midcaps, reflecting that midcap earnings compounding is predominantly driven by operating leverage.
+- **Strict Data Qualification Governance:** ZERO synthetic data generation. Stocks with insufficient price history (< 2.8 years), short financial reporting (< 3 years), or negative net worth (distressed) are strictly ignored and excluded from portfolio construction.
+- **Durable Factor Transferability:** All 9 combinations in the 3x3 Cross-Universe Matrix beat their passive benchmark index in **both Point-in-Time 7-Factor Rebalanced portfolios (+15.16% to +29.43% active alpha)** and **Equal-Weighted baskets (+1.35% to +5.62% active alpha)**.
+
 
 ---
 
