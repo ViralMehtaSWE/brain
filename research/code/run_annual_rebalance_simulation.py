@@ -192,6 +192,27 @@ def compute_stock_holding_return(sym, start_date, end_date):
         return 0.0
     return (float(p1) / float(p0)) - 1.0
 
+def project_bounded_sector_weights(raw_w, industries, min_w=0.025, max_w=0.080, sector_cap=0.250):
+    """
+    Solves for optimal weights closest to raw_w (in L2 norm) strictly satisfying:
+      1. Individual stock box constraints: w_i in [min_w, max_w]
+      2. Sector maximum exposure constraint: sum_{i in S} w_i <= sector_cap
+      3. Full investment budget: sum_i w_i == 1.0
+    Guarantees no stock exceeds 8.0% and no sector exceeds 25.0%.
+    """
+    target = np.array(raw_w, dtype=float) / np.sum(raw_w)
+    w0 = np.clip(target, min_w, max_w)
+    w0 = w0 / np.sum(w0)
+    constraints = [{'type': 'eq', 'fun': lambda w: np.sum(w) - 1.0}]
+    for ind in np.unique(industries):
+        mask = (industries == ind)
+        constraints.append({'type': 'ineq', 'fun': lambda w, m=mask: sector_cap - np.sum(w[m])})
+    bounds = [(min_w, max_w) for _ in range(len(target))]
+    res = minimize(lambda w: 0.5 * np.sum((w - target)**2), w0, method='SLSQP', bounds=bounds, constraints=constraints, options={'ftol': 1e-9})
+    if res.success:
+        return res.x
+    return w0
+
 def score_and_select_portfolio(universe_name, model_weights, filing_year):
     u_stocks = universe_df[universe_df["Benchmark_Index"] == universe_name].copy()
     meta_dict = u_stocks.set_index("Symbol").to_dict(orient="index")
@@ -200,12 +221,12 @@ def score_and_select_portfolio(universe_name, model_weights, filing_year):
     parsed = []
     for s in valid_symbols:
         d = get_point_in_time_features(s, filing_year)
-        if d:
+        if d and d['roce'] is not None:
             d["name"] = meta_dict[s]["Company Name"]
             d["industry"] = meta_dict[s]["Industry"]
             parsed.append(d)
     if not parsed:
-        return []
+        return [], {}
     df = pd.DataFrame(parsed)
 
     for c in ["roce", "hist_sales_cagr", "opm_expansion_3y", "debt_to_equity", "cfo_to_pat", "wc_days"]:
@@ -229,59 +250,30 @@ def score_and_select_portfolio(universe_name, model_weights, filing_year):
             ind_counts[ind] = ind_counts.get(ind, 0) + 1
         if len(selected) == 20:
             break
-    return selected
 
-def compute_ex_ante_weights(selected_stocks, universe_name, model_weights, filing_year):
+    scores_dict = {row["symbol"]: float(row["final_score"]) for _, row in df.iterrows()}
+    return selected, scores_dict
+
+def compute_ex_ante_weights(selected_stocks, universe_name, scores_dict):
     """
     Computes Fundamental Score-Weighted ex-ante weights strictly prior to the holding period.
     ZERO future returns or future covariance are used!
-    Enforces maximum sector concentration <= 25% and individual stock bounds [2.5%, 8.0%].
+    Directly maps universe-level scores into bounded weights [2.5%, 8.0%] with sector cap <= 25%.
     """
     N = len(selected_stocks)
     if N == 0:
         return {}
 
-    # Extract point-in-time scores
     u_stocks = universe_df[universe_df["Benchmark_Index"] == universe_name].set_index("Symbol")
-    parsed = []
-    for s in selected_stocks:
-        d = get_point_in_time_features(s, filing_year)
-        if d:
-            d['industry'] = u_stocks.loc[s, 'Industry'] if s in u_stocks.index else 'General'
-            parsed.append(d)
-    if not parsed:
-        return {s: 1.0 / N for s in selected_stocks}
+    industries = np.array([u_stocks.loc[s, 'Industry'] if s in u_stocks.index else 'General' for s in selected_stocks])
 
-    df = pd.DataFrame(parsed)
-    for c in ["roce", "hist_sales_cagr", "opm_expansion_3y", "debt_to_equity", "cfo_to_pat", "wc_days"]:
-        df[c] = df[c].fillna(df[c].median()).clip(df[c].quantile(0.02), df[c].quantile(0.98))
-        mean_c, std_c = df[c].mean(), df[c].std()
-        df[f"{c}_z"] = (df[c] - mean_c) / std_c if std_c > 0 else 0.0
-
-    score = 0.0
-    for f, w in model_weights.items():
-        sign = -1.0 if f in ["debt_to_equity", "wc_days"] else 1.0
-        score += w * (sign * df[f"{f}_z"])
-    df["final_score"] = score
-
-    scores = df['final_score'].values
+    scores = np.array([scores_dict.get(s, 0.0) for s in selected_stocks])
     min_sc, max_sc = scores.min(), scores.max()
     norm_scores = (scores - min_sc) / (max_sc - min_sc + 1e-6)
     raw_weights = 0.025 + norm_scores * (0.080 - 0.025)
-    weights = raw_weights / np.sum(raw_weights)
 
-    # Enforce strict sector cap <= 25%
-    industries = df['industry'].values
-    for _ in range(5):
-        for ind in np.unique(industries):
-            mask = (industries == ind)
-            if np.sum(weights[mask]) > 0.25:
-                excess = np.sum(weights[mask]) - 0.25
-                weights[mask] *= (0.25 / np.sum(weights[mask]))
-                weights[~mask] += excess * (weights[~mask] / np.sum(weights[~mask]))
-    weights = weights / np.sum(weights)
-
-    return {df.iloc[i]['symbol']: float(weights[i]) for i in range(len(df))}
+    opt_w = project_bounded_sector_weights(raw_weights, industries, min_w=0.025, max_w=0.080, sector_cap=0.250)
+    return {selected_stocks[i]: float(opt_w[i]) for i in range(len(selected_stocks))}
 
 def run_annual_rebalance_simulation():
     print("=" * 110)
