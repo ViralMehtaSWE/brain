@@ -144,14 +144,28 @@ def parse_latest_fundamentals(symbol, meta_dict):
     res = curr_bs.get('Reserves') or 0
     nw = eq + res
     borrowings = curr_bs.get('Borrowings') or 0
-    de = (borrowings / nw) if nw > 0 else 0.0
+    if nw <= 0:
+        return None  # Ignore distressed companies with negative net worth
+    de = borrowings / nw
+
+    if cfo is None or pat is None or pat <= 0:
+        cfo_pat = 0.0
+    else:
+        cfo_pat = min(3.0, max(0.0, cfo / pat))
+
+    if pe is None or pd.isna(pe) or pe <= 0:
+        return None  # Ignore stocks with missing or negative P/E
+
+    if roce is None or pd.isna(roce):
+        return None  # Ignore stocks with missing ROCE
 
     sales_g = compound.get('Compounded Sales Growth_3 Years')
     if sales_g is None and sales and prev_sales and sales > 0 and prev_sales > 0:
         sales_g = ((sales / prev_sales) ** (1/3) - 1) * 100
+    if sales_g is None or pd.isna(sales_g):
+        return None  # Ignore stocks with missing sales growth history
 
     opm_exp = (opm - prev_opm) if (opm is not None and prev_opm is not None) else 0.0
-    cfo_pat = (cfo / pat) if (cfo is not None and pat and pat > 0) else 1.0
 
     meta = meta_dict.get(symbol, {})
     return {
