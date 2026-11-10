@@ -266,25 +266,18 @@ def evaluate_combination(universe_name, model_name, universe_df, model_weights):
     
     valid_syms = list(price_dict.keys())
     N = len(valid_syms)
-    # Expected return is factor-implied (not ex-post realized!) to eliminate hindsight bias
-    # Higher fundamental score implies higher expected return prior to realization
+    
+    # Fundamental Alpha Score-Weighted Portfolio Construction:
+    # Allocates higher capital to highest fundamental compounders, bounded by [2.5%, 8.0%]
     scores = top20_df.set_index('symbol').loc[valid_syms, 'final_score'].values
-    score_pct = (pd.Series(scores).rank(pct=True).values)
-    rf = 0.07 # 7% Risk-Free Rate
-    mu_arr = rf + 0.08 * (0.8 + 0.4 * score_pct) # Base ERP 8% scaled by fundamental rank
+    min_sc, max_sc = scores.min(), scores.max()
+    norm_scores = (scores - min_sc) / (max_sc - min_sc + 1e-6)
+    raw_weights = 0.025 + norm_scores * (0.080 - 0.025)
+    opt_w = raw_weights / np.sum(raw_weights)
+    
     cov_arr = cov.loc[valid_syms, valid_syms].values
+    rf = 0.07 # 7% Risk-Free Rate
     
-    def neg_sharpe(w):
-        p_ret = np.dot(w, mu_arr)
-        p_vol = np.sqrt(np.dot(w.T, np.dot(cov_arr, w)))
-        return -(p_ret - rf) / p_vol if p_vol > 0 else 0.0
-        
-    init_w = np.ones(N) / N
-    bounds = tuple((0.025, 0.10) for _ in range(N))
-    cons = ({'type': 'eq', 'fun': lambda w: np.sum(w) - 1.0})
-    res_opt = minimize(neg_sharpe, init_w, method='SLSQP', bounds=bounds, constraints=cons)
-    
-    opt_w = res_opt.x if res_opt.success else init_w
     # Realized portfolio return is evaluated on actual realized holding period CAGRs
     actual_cagrs = np.array([stock_cagrs.get(s, ew_cagr) for s in valid_syms])
     port_cagr = float(np.dot(opt_w, actual_cagrs))
