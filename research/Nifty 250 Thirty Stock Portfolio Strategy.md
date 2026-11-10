@@ -1,3 +1,9 @@
+---
+permalink: obsidian/research/nifty-250-thirty-stock-portfolio-strategy-1
+title: Nifty 250 Thirty Stock Portfolio Strategy
+type: note
+---
+
 # Nifty 250 Top 30 Stocks Quantitative Portfolio: Nifty Next 50 Model Strategy
 
 **Date:** November 10, 2026  
