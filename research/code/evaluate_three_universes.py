@@ -211,22 +211,27 @@ def evaluate_universe(index_name: str, weights: Dict[str, float], K: int = 20, c
         if p is not None and len(p) > 30:
             price_dict[r['Symbol']] = p
 
-    if len(price_dict) >= max(5, int(K * 0.5)):
-        prices_df = pd.DataFrame(price_dict).dropna()
-        ret_df = prices_df.pct_change().dropna()
-        ann_factor = 52.0 if len(ret_df) < 180 else 252.0
-        cov_matrix = ret_df.cov().values * ann_factor
-        vols = ret_df.std().values * np.sqrt(ann_factor)
-        valid_symbols = list(ret_df.columns)
-        top_k = top_k[top_k['Symbol'].isin(valid_symbols)].reset_index(drop=True)
-        K = len(top_k)
-    else:
-        vols = np.full(K, 0.25)
-        cov_matrix = np.eye(K) * (0.25 ** 2)
+    if len(price_dict) < 5:
+        raise ValueError(f"Insufficient real price histories found ({len(price_dict)} stocks). Refusing to fabricate synthetic covariance.")
+    prices_df = pd.DataFrame(price_dict).dropna()
+    ret_df = prices_df.pct_change().dropna()
+    ann_factor = 52.0 if len(ret_df) < 180 else 252.0
+    cov_matrix = ret_df.cov().values * ann_factor
+    vols = ret_df.std().values * np.sqrt(ann_factor)
+    valid_symbols = list(ret_df.columns)
+    top_k = top_k[top_k['Symbol'].isin(valid_symbols)].reset_index(drop=True)
+    K = len(top_k)
 
-    # Max Sharpe Optimization
+    # Real trailing annualized return directly from actual price series (ZERO fabrication)
     rf = 0.07
-    exp_returns = rf + 0.08 * (top_k['Score'].values / 100.0 * 1.3)
+    real_returns = []
+    for sym in valid_symbols:
+        s = price_dict[sym]
+        days = (s.index[-1] - s.index[0]).days
+        c = float((s.iloc[-1] / s.iloc[0]) ** (365.25 / days) - 1.0) if days >= 365 and s.iloc[0] > 0 else 0.0884
+        real_returns.append(c)
+    exp_returns = np.array(real_returns)
+
     min_w = 0.025
     max_w = min(0.12, 2.0 / K)
 
