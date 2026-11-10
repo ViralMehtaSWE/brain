@@ -1,0 +1,698 @@
+{
+  "full_3y": {
+    "period_info": {
+      "id": "full_3y",
+      "name": "Full 3-Year Cycle (Nov 2023 - Nov 2026)",
+      "start": "2023-11-12",
+      "end": "2026-11-09",
+      "desc": "Complete Multi-Year Macro Cycle (Bull + Consolidation + Correction)"
+    },
+    "universes": {
+      "NIFTY 50": {
+        "NIFTY 50 Model": {
+          "opt_cagr": 0.20621923419539226,
+          "ew_cagr": 0.10920506267084304,
+          "bm_cagr": 0.08674562457110202,
+          "alpha_opt": 0.11947360962429024,
+          "alpha_ew": 0.02245943809974102,
+          "opt_vol": 0.35398572723329186,
+          "opt_sharpe": 0.3848156118046474,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY NEXT 50 Model": {
+          "opt_cagr": 0.22129802839662233,
+          "ew_cagr": 0.11950398264195172,
+          "bm_cagr": 0.08674562457110202,
+          "alpha_opt": 0.1345524038255203,
+          "alpha_ew": 0.0327583580708497,
+          "opt_vol": 0.3491429974854708,
+          "opt_sharpe": 0.43334115100767107,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY MIDCAP 150 Model": {
+          "opt_cagr": 0.2271467278962259,
+          "ew_cagr": 0.1309746419068845,
+          "bm_cagr": 0.08674562457110202,
+          "alpha_opt": 0.14040110332512387,
+          "alpha_ew": 0.04422901733578247,
+          "opt_vol": 0.3580579389030924,
+          "opt_sharpe": 0.4388863109072337,
+          "beats_bm": true,
+          "num_stocks": 20
+        }
+      },
+      "NIFTY NEXT 50": {
+        "NIFTY 50 Model": {
+          "opt_cagr": 0.24607036475280436,
+          "ew_cagr": 0.1765462489522875,
+          "bm_cagr": 0.1662297822654779,
+          "alpha_opt": 0.07984058248732645,
+          "alpha_ew": 0.010316466686809578,
+          "opt_vol": 0.4222974091400013,
+          "opt_sharpe": 0.4169345133122353,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY NEXT 50 Model": {
+          "opt_cagr": 0.2607261347787588,
+          "ew_cagr": 0.18256760554007717,
+          "bm_cagr": 0.1662297822654779,
+          "alpha_opt": 0.09449635251328087,
+          "alpha_ew": 0.01633782327459926,
+          "opt_vol": 0.42421659491519204,
+          "opt_sharpe": 0.4495961192109613,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY MIDCAP 150 Model": {
+          "opt_cagr": 0.26719834357605227,
+          "ew_cagr": 0.1901550486014118,
+          "bm_cagr": 0.1662297822654779,
+          "alpha_opt": 0.10096856131057436,
+          "alpha_ew": 0.023925266335933892,
+          "opt_vol": 0.4273790029050513,
+          "opt_sharpe": 0.4614132707400762,
+          "beats_bm": true,
+          "num_stocks": 20
+        }
+      },
+      "NIFTY MIDCAP 150": {
+        "NIFTY 50 Model": {
+          "opt_cagr": 0.42338507863112246,
+          "ew_cagr": 0.27347637670862657,
+          "bm_cagr": 0.1378976575288462,
+          "alpha_opt": 0.28548742110227626,
+          "alpha_ew": 0.13557871917978037,
+          "opt_vol": 0.42721379863411896,
+          "opt_sharpe": 0.8271855444766988,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY NEXT 50 Model": {
+          "opt_cagr": 0.46580964680834536,
+          "ew_cagr": 0.29491860305951756,
+          "bm_cagr": 0.1378976575288462,
+          "alpha_opt": 0.32791198927949916,
+          "alpha_ew": 0.15702094553067136,
+          "opt_vol": 0.4948128420280635,
+          "opt_sharpe": 0.7999178945842655,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY MIDCAP 150 Model": {
+          "opt_cagr": 0.4641621775387314,
+          "ew_cagr": 0.2913660678354425,
+          "bm_cagr": 0.1378976575288462,
+          "alpha_opt": 0.3262645200098852,
+          "alpha_ew": 0.1534684103065963,
+          "opt_vol": 0.49170124609249355,
+          "opt_sharpe": 0.8016294053983053,
+          "beats_bm": true,
+          "num_stocks": 20
+        }
+      }
+    }
+  },
+  "year_1": {
+    "period_info": {
+      "id": "year_1",
+      "name": "Year 1: Bull Expansion (Nov 2023 - Nov 2024)",
+      "start": "2023-11-12",
+      "end": "2024-11-08",
+      "desc": "High Liquidity, Rapid Topline Expansion & Midcap Bull Run"
+    },
+    "universes": {
+      "NIFTY 50": {
+        "NIFTY 50 Model": {
+          "opt_cagr": 0.5761942202897489,
+          "ew_cagr": 0.36637469653118393,
+          "bm_cagr": 0.23911034301220457,
+          "alpha_opt": 0.3370838772775443,
+          "alpha_ew": 0.12726435351897936,
+          "opt_vol": 0.13845661006062449,
+          "opt_sharpe": 3.655977277416421,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY NEXT 50 Model": {
+          "opt_cagr": 0.578649285319534,
+          "ew_cagr": 0.3737169803424335,
+          "bm_cagr": 0.23911034301220457,
+          "alpha_opt": 0.3395389423073294,
+          "alpha_ew": 0.13460663733022893,
+          "opt_vol": 0.13705987932510874,
+          "opt_sharpe": 3.711146455287676,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY MIDCAP 150 Model": {
+          "opt_cagr": 0.6015271423118711,
+          "ew_cagr": 0.4255379560812707,
+          "bm_cagr": 0.23911034301220457,
+          "alpha_opt": 0.3624167992996665,
+          "alpha_ew": 0.18642761306906613,
+          "opt_vol": 0.14099552991349237,
+          "opt_sharpe": 3.7698155582520156,
+          "beats_bm": true,
+          "num_stocks": 20
+        }
+      },
+      "NIFTY NEXT 50": {
+        "NIFTY 50 Model": {
+          "opt_cagr": 0.5837199971950956,
+          "ew_cagr": 0.5357902478298299,
+          "bm_cagr": 0.524422187959287,
+          "alpha_opt": 0.05929780923580863,
+          "alpha_ew": 0.011368059870542901,
+          "opt_vol": 0.1426568347850522,
+          "opt_sharpe": 3.6010892711109275,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY NEXT 50 Model": {
+          "opt_cagr": 0.6010272158442829,
+          "ew_cagr": 0.534366430619227,
+          "bm_cagr": 0.524422187959287,
+          "alpha_opt": 0.0766050278849959,
+          "alpha_ew": 0.009944242659939984,
+          "opt_vol": 0.13829305768045044,
+          "opt_sharpe": 3.8398689330545515,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY MIDCAP 150 Model": {
+          "opt_cagr": 0.58967855722717,
+          "ew_cagr": 0.5467852399052677,
+          "bm_cagr": 0.524422187959287,
+          "alpha_opt": 0.06525636926788303,
+          "alpha_ew": 0.02236305194598076,
+          "opt_vol": 0.13944450378249254,
+          "opt_sharpe": 3.726776912181292,
+          "beats_bm": true,
+          "num_stocks": 20
+        }
+      },
+      "NIFTY MIDCAP 150": {
+        "NIFTY 50 Model": {
+          "opt_cagr": 1.104987162109865,
+          "ew_cagr": 0.8050409959608411,
+          "bm_cagr": 0.37314188423584915,
+          "alpha_opt": 0.7318452778740159,
+          "alpha_ew": 0.43189911172499196,
+          "opt_vol": 0.17723988396897117,
+          "opt_sharpe": 5.839470997910701,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY NEXT 50 Model": {
+          "opt_cagr": 1.2869344134389349,
+          "ew_cagr": 0.9290368464791208,
+          "bm_cagr": 0.37314188423584915,
+          "alpha_opt": 0.9137925292030857,
+          "alpha_ew": 0.5558949622432716,
+          "opt_vol": 0.20558258676094548,
+          "opt_sharpe": 5.9194430453100795,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY MIDCAP 150 Model": {
+          "opt_cagr": 1.2878792251124238,
+          "ew_cagr": 0.9498864517470691,
+          "bm_cagr": 0.37314188423584915,
+          "alpha_opt": 0.9147373408765747,
+          "alpha_ew": 0.5767445675112199,
+          "opt_vol": 0.20459632610914236,
+          "opt_sharpe": 5.9525957688152396,
+          "beats_bm": true,
+          "num_stocks": 20
+        }
+      }
+    }
+  },
+  "year_2": {
+    "period_info": {
+      "id": "year_2",
+      "name": "Year 2: Valuation Consolidation (Nov 2024 - Nov 2025)",
+      "start": "2024-11-08",
+      "end": "2025-11-07",
+      "desc": "Selective Quality Dispersion; Next 50 Flat (-0.59%), Midcaps +5.87%"
+    },
+    "universes": {
+      "NIFTY 50": {
+        "NIFTY 50 Model": {
+          "opt_cagr": 0.1740730039320648,
+          "ew_cagr": 0.04704515876053443,
+          "bm_cagr": 0.05585684675137936,
+          "alpha_opt": 0.11821615718068543,
+          "alpha_ew": -0.008811687990844932,
+          "opt_vol": 0.158878868054134,
+          "opt_sharpe": 0.6550462324329029,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY NEXT 50 Model": {
+          "opt_cagr": 0.19960695566529219,
+          "ew_cagr": 0.054773084365852154,
+          "bm_cagr": 0.05585684675137936,
+          "alpha_opt": 0.14375010891391282,
+          "alpha_ew": -0.0010837623855272094,
+          "opt_vol": 0.15833505293284933,
+          "opt_sharpe": 0.8185613562162961,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY MIDCAP 150 Model": {
+          "opt_cagr": 0.18377228555547495,
+          "ew_cagr": 0.05596381504592418,
+          "bm_cagr": 0.05585684675137936,
+          "alpha_opt": 0.1279154388040956,
+          "alpha_ew": 0.00010696829454481804,
+          "opt_vol": 0.16660442679539977,
+          "opt_sharpe": 0.6828887307730072,
+          "beats_bm": true,
+          "num_stocks": 20
+        }
+      },
+      "NIFTY NEXT 50": {
+        "NIFTY 50 Model": {
+          "opt_cagr": 0.12740411350307168,
+          "ew_cagr": 0.03239856522389041,
+          "bm_cagr": -0.005868174068672571,
+          "alpha_opt": 0.13327228757174425,
+          "alpha_ew": 0.03826673929256298,
+          "opt_vol": 0.21437571728694924,
+          "opt_sharpe": 0.2677733944382997,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY NEXT 50 Model": {
+          "opt_cagr": 0.11953051556328873,
+          "ew_cagr": 0.037765756859861,
+          "bm_cagr": -0.005868174068672571,
+          "alpha_opt": 0.1253986896319613,
+          "alpha_ew": 0.04363393092853357,
+          "opt_vol": 0.2087264348576042,
+          "opt_sharpe": 0.23729871876113373,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY MIDCAP 150 Model": {
+          "opt_cagr": 0.14790409507190783,
+          "ew_cagr": 0.052588534584185685,
+          "bm_cagr": -0.005868174068672571,
+          "alpha_opt": 0.1537722691405804,
+          "alpha_ew": 0.05845670865285826,
+          "opt_vol": 0.22557521209608988,
+          "opt_sharpe": 0.34535751667041525,
+          "beats_bm": true,
+          "num_stocks": 20
+        }
+      },
+      "NIFTY MIDCAP 150": {
+        "NIFTY 50 Model": {
+          "opt_cagr": 0.22623916439684316,
+          "ew_cagr": 0.10262931028826579,
+          "bm_cagr": 0.058657729358918775,
+          "alpha_opt": 0.1675814350379244,
+          "alpha_ew": 0.04397158092934701,
+          "opt_vol": 0.2128325046768512,
+          "opt_sharpe": 0.7340944684838667,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY NEXT 50 Model": {
+          "opt_cagr": 0.2784172704576413,
+          "ew_cagr": 0.12086295341307089,
+          "bm_cagr": 0.058657729358918775,
+          "alpha_opt": 0.21975954109872253,
+          "alpha_ew": 0.06220522405415212,
+          "opt_vol": 0.24031017797131343,
+          "opt_sharpe": 0.867284408080796,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY MIDCAP 150 Model": {
+          "opt_cagr": 0.2743532752721807,
+          "ew_cagr": 0.11716483129664194,
+          "bm_cagr": 0.058657729358918775,
+          "alpha_opt": 0.2156955459132619,
+          "alpha_ew": 0.05850710193772317,
+          "opt_vol": 0.24375129365290862,
+          "opt_sharpe": 0.8383679619078082,
+          "beats_bm": true,
+          "num_stocks": 20
+        }
+      }
+    }
+  },
+  "year_3": {
+    "period_info": {
+      "id": "year_3",
+      "name": "Year 3: Cyclical Correction / Late Cycle (Nov 2025 - Nov 2026)",
+      "start": "2025-11-07",
+      "end": "2026-11-09",
+      "desc": "Headwinds & Compression: Nifty 50 Negative (-1.75%), Midcaps Flattish (+1.55%)"
+    },
+    "universes": {
+      "NIFTY 50": {
+        "NIFTY 50 Model": {
+          "opt_cagr": 0.08548309948431614,
+          "ew_cagr": -0.008811498942153,
+          "bm_cagr": -0.017477206537417245,
+          "alpha_opt": 0.10296030602173338,
+          "alpha_ew": 0.008665707595264244,
+          "opt_vol": 0.14716417610400917,
+          "opt_sharpe": 0.10520970452328939,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY NEXT 50 Model": {
+          "opt_cagr": 0.10584465195688399,
+          "ew_cagr": 0.007352085400203295,
+          "bm_cagr": -0.017477206537417245,
+          "alpha_opt": 0.12332185849430123,
+          "alpha_ew": 0.02482929193762054,
+          "opt_vol": 0.1398295692808012,
+          "opt_sharpe": 0.2563452933542398,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY MIDCAP 150 Model": {
+          "opt_cagr": 0.09381526074074567,
+          "ew_cagr": -0.0029103747673094706,
+          "bm_cagr": -0.017477206537417245,
+          "alpha_opt": 0.11129246727816292,
+          "alpha_ew": 0.014566831770107775,
+          "opt_vol": 0.1459060740781573,
+          "opt_sharpe": 0.16322323036386116,
+          "beats_bm": true,
+          "num_stocks": 20
+        }
+      },
+      "NIFTY NEXT 50": {
+        "NIFTY 50 Model": {
+          "opt_cagr": 0.23395345962949216,
+          "ew_cagr": 0.07261167900861613,
+          "bm_cagr": 0.04911014889332721,
+          "alpha_opt": 0.18484331073616495,
+          "alpha_ew": 0.023501530115288924,
+          "opt_vol": 0.21106141810412596,
+          "opt_sharpe": 0.7768045012784224,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY NEXT 50 Model": {
+          "opt_cagr": 0.21915428272636425,
+          "ew_cagr": 0.07489296012976893,
+          "bm_cagr": 0.04911014889332721,
+          "alpha_opt": 0.17004413383303704,
+          "alpha_ew": 0.025782811236441716,
+          "opt_vol": 0.20593140465828785,
+          "opt_sharpe": 0.7242910957358024,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY MIDCAP 150 Model": {
+          "opt_cagr": 0.23584346931758082,
+          "ew_cagr": 0.07693027684766551,
+          "bm_cagr": 0.04911014889332721,
+          "alpha_opt": 0.1867333204242536,
+          "alpha_ew": 0.027820127954338303,
+          "opt_vol": 0.21636251331224504,
+          "opt_sharpe": 0.7665074082322324,
+          "beats_bm": true,
+          "num_stocks": 20
+        }
+      },
+      "NIFTY MIDCAP 150": {
+        "NIFTY 50 Model": {
+          "opt_cagr": 0.24553572345480976,
+          "ew_cagr": 0.0893921618372837,
+          "bm_cagr": 0.015533509541852064,
+          "alpha_opt": 0.2300022139129577,
+          "alpha_ew": 0.07385865229543163,
+          "opt_vol": 0.1746968237189497,
+          "opt_sharpe": 1.004802031988914,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY NEXT 50 Model": {
+          "opt_cagr": 0.23238925171397518,
+          "ew_cagr": 0.0619975224495216,
+          "bm_cagr": 0.015533509541852064,
+          "alpha_opt": 0.2168557421721231,
+          "alpha_ew": 0.046464012907669536,
+          "opt_vol": 0.19710128753769007,
+          "opt_sharpe": 0.8238873207914625,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY MIDCAP 150 Model": {
+          "opt_cagr": 0.2220710585717014,
+          "ew_cagr": 0.04125682749481769,
+          "bm_cagr": 0.015533509541852064,
+          "alpha_opt": 0.20653754902984933,
+          "alpha_ew": 0.025723317952965626,
+          "opt_vol": 0.19490584413796785,
+          "opt_sharpe": 0.7802283161096748,
+          "beats_bm": true,
+          "num_stocks": 20
+        }
+      }
+    }
+  },
+  "first_2y": {
+    "period_info": {
+      "id": "first_2y",
+      "name": "First 2 Years (Nov 2023 - Nov 2025)",
+      "start": "2023-11-12",
+      "end": "2025-11-07",
+      "desc": "Sustained Mid-Cycle Bull Run (N50 +14.36%, Midcaps +20.53%)"
+    },
+    "universes": {
+      "NIFTY 50": {
+        "NIFTY 50 Model": {
+          "opt_cagr": 0.28640039982258836,
+          "ew_cagr": 0.1782211393663898,
+          "bm_cagr": 0.1435674214514162,
+          "alpha_opt": 0.14283297837117215,
+          "alpha_ew": 0.0346537179149736,
+          "opt_vol": 0.3458652676364791,
+          "opt_sharpe": 0.6256783206402659,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY NEXT 50 Model": {
+          "opt_cagr": 0.30436160851801625,
+          "ew_cagr": 0.18559005728494998,
+          "bm_cagr": 0.1435674214514162,
+          "alpha_opt": 0.16079418706660004,
+          "alpha_ew": 0.04202263583353377,
+          "opt_vol": 0.3432685514014629,
+          "opt_sharpe": 0.6827354488524738,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY MIDCAP 150 Model": {
+          "opt_cagr": 0.32996968855381514,
+          "ew_cagr": 0.2099703732254941,
+          "bm_cagr": 0.1435674214514162,
+          "alpha_opt": 0.18640226710239893,
+          "alpha_ew": 0.0664029517740779,
+          "opt_vol": 0.37716174139185743,
+          "opt_sharpe": 0.6892790546422788,
+          "beats_bm": true,
+          "num_stocks": 20
+        }
+      },
+      "NIFTY NEXT 50": {
+        "NIFTY 50 Model": {
+          "opt_cagr": 0.34142694007738694,
+          "ew_cagr": 0.2500887482415008,
+          "bm_cagr": 0.23032227666043137,
+          "alpha_opt": 0.11110466341695557,
+          "alpha_ew": 0.019766471581069422,
+          "opt_vol": 0.4260586941863523,
+          "opt_sharpe": 0.6370646668664587,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY NEXT 50 Model": {
+          "opt_cagr": 0.33509143862205615,
+          "ew_cagr": 0.252097071702551,
+          "bm_cagr": 0.23032227666043137,
+          "alpha_opt": 0.10476916196162478,
+          "alpha_ew": 0.021774795042119655,
+          "opt_vol": 0.40820908354355023,
+          "opt_sharpe": 0.6494011263073095,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY MIDCAP 150 Model": {
+          "opt_cagr": 0.3570138304364362,
+          "ew_cagr": 0.2676952137266011,
+          "bm_cagr": 0.23032227666043137,
+          "alpha_opt": 0.12669155377600483,
+          "alpha_ew": 0.03737293706616973,
+          "opt_vol": 0.43105700940010716,
+          "opt_sharpe": 0.6658372887518225,
+          "beats_bm": true,
+          "num_stocks": 20
+        }
+      },
+      "NIFTY MIDCAP 150": {
+        "NIFTY 50 Model": {
+          "opt_cagr": 0.5355206191443258,
+          "ew_cagr": 0.38943037318598517,
+          "bm_cagr": 0.2052576632272074,
+          "alpha_opt": 0.3302629559171184,
+          "alpha_ew": 0.18417270995877777,
+          "opt_vol": 0.4314526995544467,
+          "opt_sharpe": 1.0789609605527104,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY NEXT 50 Model": {
+          "opt_cagr": 0.6515145840678982,
+          "ew_cagr": 0.44606569601755364,
+          "bm_cagr": 0.2052576632272074,
+          "alpha_opt": 0.4462569208406908,
+          "alpha_ew": 0.24080803279034624,
+          "opt_vol": 0.518912886647434,
+          "opt_sharpe": 1.1206400901409832,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY MIDCAP 150 Model": {
+          "opt_cagr": 0.6597386775755553,
+          "ew_cagr": 0.4535849549656071,
+          "bm_cagr": 0.2052576632272074,
+          "alpha_opt": 0.45448101434834787,
+          "alpha_ew": 0.24832729173839968,
+          "opt_vol": 0.5212526885204124,
+          "opt_sharpe": 1.1313873109212,
+          "beats_bm": true,
+          "num_stocks": 20
+        }
+      }
+    }
+  },
+  "trailing_2y": {
+    "period_info": {
+      "id": "trailing_2y",
+      "name": "Trailing 2 Years (Nov 2024 - Nov 2026)",
+      "start": "2024-11-08",
+      "end": "2026-11-09",
+      "desc": "Subdued Macro Environment (N50 +1.84%, Next 50 +2.14%, Midcaps +3.68%)"
+    },
+    "universes": {
+      "NIFTY 50": {
+        "NIFTY 50 Model": {
+          "opt_cagr": 0.10827529999179611,
+          "ew_cagr": 0.013566370681153211,
+          "bm_cagr": 0.01837959163083913,
+          "alpha_opt": 0.08989570836095698,
+          "alpha_ew": -0.00481322094968592,
+          "opt_vol": 0.3567233452549459,
+          "opt_sharpe": 0.1072968744572666,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY NEXT 50 Model": {
+          "opt_cagr": 0.1275965257876515,
+          "ew_cagr": 0.025126064029727373,
+          "bm_cagr": 0.01837959163083913,
+          "alpha_opt": 0.10921693415681236,
+          "alpha_ew": 0.006746472398888242,
+          "opt_vol": 0.35610541951103836,
+          "opt_sharpe": 0.16174009894804797,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY MIDCAP 150 Model": {
+          "opt_cagr": 0.12586505805428896,
+          "ew_cagr": 0.021663128563003703,
+          "bm_cagr": 0.01837959163083913,
+          "alpha_opt": 0.10748546642344983,
+          "alpha_ew": 0.0032835369321645713,
+          "opt_vol": 0.3639606997116827,
+          "opt_sharpe": 0.15349200641317415,
+          "beats_bm": true,
+          "num_stocks": 20
+        }
+      },
+      "NIFTY NEXT 50": {
+        "NIFTY 50 Model": {
+          "opt_cagr": 0.11217255091513796,
+          "ew_cagr": 0.03730088343595931,
+          "bm_cagr": 0.021363896785052683,
+          "alpha_opt": 0.09080865413008528,
+          "alpha_ew": 0.015936986650906627,
+          "opt_vol": 0.4753613203513238,
+          "opt_sharpe": 0.08871683309018416,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY NEXT 50 Model": {
+          "opt_cagr": 0.11602524347449708,
+          "ew_cagr": 0.04568261134931407,
+          "bm_cagr": 0.021363896785052683,
+          "alpha_opt": 0.0946613466894444,
+          "alpha_ew": 0.024318714564261386,
+          "opt_vol": 0.46694276210975744,
+          "opt_sharpe": 0.09856720611011117,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY MIDCAP 150 Model": {
+          "opt_cagr": 0.13482302523225909,
+          "ew_cagr": 0.05213740108125242,
+          "bm_cagr": 0.021363896785052683,
+          "alpha_opt": 0.1134591284472064,
+          "alpha_ew": 0.03077350429619974,
+          "opt_vol": 0.48403925039934914,
+          "opt_sharpe": 0.13392100987425676,
+          "beats_bm": true,
+          "num_stocks": 20
+        }
+      },
+      "NIFTY MIDCAP 150": {
+        "NIFTY 50 Model": {
+          "opt_cagr": 0.2227573123584755,
+          "ew_cagr": 0.08801445305282911,
+          "bm_cagr": 0.03678296777852763,
+          "alpha_opt": 0.18597434457994788,
+          "alpha_ew": 0.05123148527430148,
+          "opt_vol": 0.45875661519990435,
+          "opt_sharpe": 0.33298116538747047,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY NEXT 50 Model": {
+          "opt_cagr": 0.22975225310903907,
+          "ew_cagr": 0.08136481500878787,
+          "bm_cagr": 0.03678296777852763,
+          "alpha_opt": 0.19296928533051144,
+          "alpha_ew": 0.044581847230260235,
+          "opt_vol": 0.5097434570243804,
+          "opt_sharpe": 0.3133973588235745,
+          "beats_bm": true,
+          "num_stocks": 20
+        },
+        "NIFTY MIDCAP 150 Model": {
+          "opt_cagr": 0.22080438307731842,
+          "ew_cagr": 0.06849450984559124,
+          "bm_cagr": 0.03678296777852763,
+          "alpha_opt": 0.1840214152987908,
+          "alpha_ew": 0.031711542067063614,
+          "opt_vol": 0.5200972004742151,
+          "opt_sharpe": 0.2899542295936562,
+          "beats_bm": true,
+          "num_stocks": 20
+        }
+      }
+    }
+  }
+}
