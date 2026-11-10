@@ -52,7 +52,20 @@ def has_sufficient_history(symbol, min_price_years=2.8, min_pl_years=3):
         years = (df[dcol].max() - df[dcol].min()).days / 365.25
         if years < min_price_years: return False
     except: return False
+
+    try:
+        with open(hf, 'r', encoding='utf-8') as f: html = f.read()
+        pos = html.find('id="profit-loss"')
+        if pos == -1: return False
+        sec = html[pos:html.find('</section>', pos)]
+        thead = re.search(r'<thead>(.*?)</thead>', sec, re.DOTALL)
+        if not thead: return False
+        ths = re.findall(r'<th[^>]*>(.*?)</th>', thead.group(1), re.DOTALL)
+        if len(ths) - 1 < min_pl_years: return False
+    except: return False
+
     return True
+
 
 def parse_latest_fundamentals(symbol, meta_dict):
     t_clean = 'TATAMOTORS' if symbol in ['TMPV', 'TMCV'] else symbol.upper().strip()
