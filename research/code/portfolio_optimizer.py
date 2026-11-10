@@ -397,21 +397,25 @@ class PortfolioOptimizer:
                 price_dict[row['ticker']] = s
 
         # Align prices into returns dataframe
-        if len(price_dict) >= max(2, int(K * 0.6)):
-            prices_df = pd.DataFrame(price_dict).dropna()
-            returns_df = prices_df.pct_change().dropna()
-            # Annualized covariance (using 52 weekly / 252 daily periods)
-            annual_factor = 52.0 if len(returns_df) < 180 else 252.0
-            cov_matrix = returns_df.cov().values * annual_factor
-            ann_vols = returns_df.std().values * np.sqrt(annual_factor)
-            available_tickers = list(returns_df.columns)
-            top_k_df = top_k_df[top_k_df['ticker'].isin(available_tickers)].reset_index(drop=True)
-        else:
-            # Synthetic default covariance if price series unavailable
-            available_tickers = top_tickers
-            n = len(top_tickers)
-            cov_matrix = np.eye(n) * (0.22 ** 2) + np.ones((n, n)) * 0.015
-            ann_vols = np.full(n, 0.22)
+        if len(price_dict) < 2:
+            raise ValueError(
+                f"Insufficient real historical price series available (found {len(price_dict)} stocks with price data). "
+                f"Real price data required; synthetic data generation is forbidden."
+            )
+
+        prices_df = pd.DataFrame(price_dict).dropna()
+        returns_df = prices_df.pct_change().dropna()
+        if len(returns_df) < 10:
+            raise ValueError(
+                f"Insufficient overlapping trading days ({len(returns_df)}) in real price history. "
+                f"Real price data required; synthetic data generation is forbidden."
+            )
+
+        annual_factor = 52.0 if len(returns_df) < 180 else 252.0
+        cov_matrix = returns_df.cov().values * annual_factor
+        ann_vols = returns_df.std().values * np.sqrt(annual_factor)
+        available_tickers = list(returns_df.columns)
+        top_k_df = top_k_df[top_k_df['ticker'].isin(available_tickers)].reset_index(drop=True)
 
         # 3. Factor-implied Expected Returns (Fundamental Alpha Anchoring)
         # Higher score = higher expected earnings compounding & alpha
