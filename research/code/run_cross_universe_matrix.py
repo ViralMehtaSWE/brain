@@ -22,10 +22,16 @@ import numpy as np
 import pandas as pd
 from scipy.optimize import minimize
 
-SCRATCH_DIR = "/Users/viralmehta/.gemini/antigravity-cli/brain/7d4b83c2-c66a-4f9e-8a3b-9192a3ba2d22/scratch"
-CACHE_DIR = os.path.join(SCRATCH_DIR, "screener_cache")
-UNIVERSE_CSV = os.path.join(SCRATCH_DIR, "nifty_250_universe.csv")
-CALIBRATION_JSON = os.path.join(SCRATCH_DIR, "audited_three_universes_calibration.json")
+try:
+    from config import CACHE_DIR, UNIVERSE_CSV, CALIBRATION_JSON, DATA_DIR, OUTPUT_DIR
+    SCRATCH_DIR = DATA_DIR
+except ImportError:
+    SCRATCH_DIR = "/Users/viralmehta/.gemini/antigravity-cli/brain/7d4b83c2-c66a-4f9e-8a3b-9192a3ba2d22/scratch"
+    CACHE_DIR = os.path.join(SCRATCH_DIR, "screener_cache")
+    UNIVERSE_CSV = os.path.join(SCRATCH_DIR, "nifty_250_universe.csv")
+    CALIBRATION_JSON = os.path.join(SCRATCH_DIR, "audited_three_universes_calibration.json")
+    OUTPUT_DIR = SCRATCH_DIR
+
 
 # Official 3-Year Benchmark Performance (NSE TRI Archives)
 BENCHMARKS = {
