@@ -182,19 +182,24 @@ def analyze_factors_and_derive_weights(panel_df, universe_name):
             'p_value': float(p_val)
         }
         
-    # Temporal Train/Test split for Random Forest to prevent in-sample overfitting
-    years_sorted = sorted(clean_df['year'].unique())
-    split_idx = max(1, int(len(years_sorted) * 0.7))
-    train_years = years_sorted[:split_idx]
-    test_years = years_sorted[split_idx:] if split_idx < len(years_sorted) else years_sorted
+    # Temporal Train/Test split on pre-sample data (outcomes realized <= Mar 2023, i.e. t <= 2020)
+    # with strict 3-year embargo between train and test windows
+    pre_sample = clean_df[clean_df['year'].apply(lambda y: int(y.split()[1]) <= 2020)].copy()
+    pre_years = sorted([y for y, c in pre_sample['year'].value_counts().items() if c >= 10])
+    if len(pre_years) >= 3:
+        train_years = [pre_years[0]]
+        test_years = [pre_years[-1]]  # embargo pre_years[1:-1]
+    else:
+        train_years = pre_years[:1]
+        test_years = pre_years[1:] if len(pre_years) > 1 else pre_years
 
-    train_mask = clean_df['year'].isin(train_years)
-    test_mask = clean_df['year'].isin(test_years)
+    train_mask = pre_sample['year'].isin(train_years)
+    test_mask = pre_sample['year'].isin(test_years)
 
-    X_train, y_train = clean_df.loc[train_mask, features], clean_df.loc[train_mask, 'target_fwd_pat_cagr']
-    X_test, y_test = clean_df.loc[test_mask, features], clean_df.loc[test_mask, 'target_fwd_pat_cagr']
+    X_train, y_train = pre_sample.loc[train_mask, features], pre_sample.loc[train_mask, 'target_fwd_pat_cagr']
+    X_test, y_test = pre_sample.loc[test_mask, features], pre_sample.loc[test_mask, 'target_fwd_pat_cagr']
 
-    rf = RandomForestRegressor(n_estimators=200, max_depth=4, random_state=42)
+    rf = RandomForestRegressor(n_estimators=200, max_depth=3, random_state=42)
     rf.fit(X_train, y_train)
     perm = permutation_importance(rf, X_test, y_test, n_repeats=15, random_state=42)
     
@@ -202,25 +207,35 @@ def analyze_factors_and_derive_weights(panel_df, universe_name):
         stats[f]['rf_gini'] = float(rf.feature_importances_[i])
         stats[f]['perm_imp'] = float(max(0.0, perm.importances_mean[i]))
         
-    # Unrounded Weights Derivation: strictly respect directional IC
-    # Factors with negative directional correlation are NOT rewarded with positive weight
-    raw_w = {}
+    # Unrounded Weights Derivation: Bayesian shrinkage toward equal-weight prior with bounding [0.05, 0.35]
+    # Prevents degenerate single-factor concentration (~85% in cfo_to_pat) while rewarding positive directional alpha
+    K = len(features)
+    prior_w = 1.0 / K  # Equal-weight prior = 1/6
+
+    raw_empirical = {}
     for f in features:
         ic_sign = -1.0 if f in ['debt_to_equity', 'wc_days'] else 1.0
         dir_ic = stats[f]['mean_ic'] * ic_sign
         if dir_ic <= 0.0:
-            raw_w[f] = 0.0
+            raw_empirical[f] = 0.0
         else:
-            raw_w[f] = 0.5 * dir_ic + 0.5 * stats[f]['perm_imp']
-        
-    tot = sum(raw_w.values())
-    if tot == 0:
-        tot = 1.0
-        raw_w = {f: 1.0 / len(features) for f in features}
-    unrounded_w = {f: raw_w[f] / tot for f in features}
+            raw_empirical[f] = 0.5 * dir_ic + 0.5 * stats[f]['perm_imp']
+
+    emp_sum = sum(raw_empirical.values())
+    norm_empirical = {f: raw_empirical[f] / emp_sum for f in features} if emp_sum > 0 else {f: prior_w for f in features}
     
+    # 50% Bayesian blend between empirical alpha and equal-weight prior
+    blended_w = {f: 0.50 * norm_empirical[f] + 0.50 * prior_w for f in features}
+
+    # Project with bounded constraints: each factor weight wf in [0.05, 0.35]
+    w_arr = np.array([blended_w[f] for f in features])
+    for _ in range(50):
+        w_arr = np.clip(w_arr, 0.05, 0.35)
+        w_arr = w_arr / np.sum(w_arr)
+
+    unrounded_w = {f: float(w_arr[i]) for i, f in enumerate(features)}
     rounded_w = {f: round(unrounded_w[f], 3) for f in features}
-    diff = 1.0 - sum(rounded_w.values())
+    diff = round(1.0 - sum(rounded_w.values()), 3)
     top_f = max(rounded_w, key=rounded_w.get)
     rounded_w[top_f] = round(rounded_w[top_f] + diff, 3)
     
@@ -250,8 +265,14 @@ def main():
             'rounded_weights': rounded_w
         }
         
-    with open(os.path.join(SCRATCH_DIR, "audited_three_universes_calibration.json"), "w") as f:
-        json.dump(audit_results, f, indent=2)
+    out_paths = [CALIBRATION_JSON]
+    legacy_path = os.path.join("/Users/viralmehta/.gemini/antigravity-cli/brain/7d4b83c2-c66a-4f9e-8a3b-9192a3ba2d22/scratch", "audited_three_universes_calibration.json")
+    if legacy_path not in out_paths and os.path.exists(os.path.dirname(legacy_path)):
+        out_paths.append(legacy_path)
+
+    for p in out_paths:
+        with open(p, "w") as f:
+            json.dump(audit_results, f, indent=2)
         
     print("\n" + "="*85)
     print("AUDITED RESULTS ACROSS ALL THREE UNIVERSES (100% CONSTITUENTS)")
