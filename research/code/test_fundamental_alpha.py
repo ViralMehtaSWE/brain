@@ -19,7 +19,13 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.inspection import permutation_importance
 
 import sys
+import os
+
+_CURR_DIR = os.path.dirname(os.path.abspath(__file__))
+if _CURR_DIR not in sys.path:
+    sys.path.insert(0, _CURR_DIR)
 sys.path.append("/Users/viralmehta/.gemini/antigravity-cli/brain/7d4b83c2-c66a-4f9e-8a3b-9192a3ba2d22/scratch")
+
 from parse_and_extract import clean_num, parse_financial_section, parse_top_ratios, parse_compound_tables
 
 
