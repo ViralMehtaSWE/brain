@@ -10,9 +10,14 @@ import os
 import json
 import pandas as pd
 
-SCRATCH_DIR = "/Users/viralmehta/.gemini/antigravity-cli/brain/7d4b83c2-c66a-4f9e-8a3b-9192a3ba2d22/scratch"
-AUDIT_JSON = os.path.join(SCRATCH_DIR, "audited_three_universes_calibration.json")
-UNIVERSE_CSV = os.path.join(SCRATCH_DIR, "nifty_250_universe.csv")
+try:
+    from config import CALIBRATION_JSON, UNIVERSE_CSV, DATA_DIR
+    AUDIT_JSON = CALIBRATION_JSON
+except ImportError:
+    SCRATCH_DIR = "/Users/viralmehta/.gemini/antigravity-cli/brain/7d4b83c2-c66a-4f9e-8a3b-9192a3ba2d22/scratch"
+    AUDIT_JSON = os.path.join(SCRATCH_DIR, "audited_three_universes_calibration.json")
+    UNIVERSE_CSV = os.path.join(SCRATCH_DIR, "nifty_250_universe.csv")
+
 
 class TestMasterAuditIntegrity(unittest.TestCase):
 
