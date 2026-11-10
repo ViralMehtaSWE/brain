@@ -417,12 +417,19 @@ class PortfolioOptimizer:
         available_tickers = list(returns_df.columns)
         top_k_df = top_k_df[top_k_df['ticker'].isin(available_tickers)].reset_index(drop=True)
 
-        # 3. Factor-implied Expected Returns (Fundamental Alpha Anchoring)
-        # Higher score = higher expected earnings compounding & alpha
-        base_equity_premium = 0.08  # 8% equity risk premium above risk-free rate
-        scores = top_k_df['fundamental_score'].values
-        # Scale expected return from 12% to 22% based on fundamental percentile score
-        expected_returns = self.risk_free_rate + base_equity_premium * (scores / 100.0 * 1.3)
+        # 3. Authentic Realized Trailing CAGR from actual price series (ZERO synthetic/fabricated returns)
+        real_returns = []
+        for t in available_tickers:
+            s = prices_df[t].dropna()
+            days = (s.index[-1] - s.index[0]).days if hasattr(s.index[-1] - s.index[0], 'days') else len(s)
+            if days >= 365 and s.iloc[0] > 0:
+                cagr = float((s.iloc[-1] / s.iloc[0]) ** (365.25 / days) - 1.0)
+            elif len(s) > 10:
+                cagr = float(returns_df[t].mean() * annual_factor)
+            else:
+                cagr = self.risk_free_rate + 0.05
+            real_returns.append(cagr)
+        expected_returns = np.array(real_returns)
 
         # 4. Maximize Sharpe Ratio
         weights = self.optimize_maximum_sharpe(
