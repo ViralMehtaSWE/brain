@@ -281,23 +281,14 @@ def evaluate_combination(universe_name, model_name, universe_df, model_weights):
     valid_syms = list(p_df.columns)
     N = len(valid_syms)
 
-    # Fundamental Alpha Score-Weighted Portfolio Construction [2.5%, 8.0%]
+    # Fundamental Alpha Score-Weighted Portfolio Construction [2.5%, 8.0%] with Strict Sector Cap <= 25.0%
     scores = top20_df.set_index('symbol').loc[valid_syms, 'final_score'].values
     min_sc, max_sc = scores.min(), scores.max()
     norm_scores = (scores - min_sc) / (max_sc - min_sc + 1e-6)
     raw_weights = 0.025 + norm_scores * (0.080 - 0.025)
-    opt_w = raw_weights / np.sum(raw_weights)
 
-    # Strict Sector Cap Enforcement <= 25.0%
     industries = top20_df.set_index('symbol').loc[valid_syms, 'industry'].values
-    for _ in range(5):
-        for ind in np.unique(industries):
-            mask = (industries == ind)
-            if np.sum(opt_w[mask]) > 0.25:
-                excess = np.sum(opt_w[mask]) - 0.25
-                opt_w[mask] *= (0.25 / np.sum(opt_w[mask]))
-                opt_w[~mask] += excess * (opt_w[~mask] / np.sum(opt_w[~mask]))
-    opt_w = opt_w / np.sum(opt_w)
+    opt_w = project_bounded_sector_weights(raw_weights, industries, min_w=0.025, max_w=0.080, sector_cap=0.250)
 
     # True Daily Portfolio Time-Series Compounding
     rel_prices = p_df / p_df.iloc[0]
@@ -324,11 +315,19 @@ def evaluate_combination(universe_name, model_name, universe_df, model_weights):
     sharpe_delta = port_sharpe - bm_stats['sharpe']
     beats_benchmark = active_alpha > 0.0
 
+    max_w = float(np.max(opt_w))
+    min_w = float(np.min(opt_w))
+    max_sec = float(max(np.sum(opt_w[industries == ind]) for ind in np.unique(industries)))
+
     return {
         'universe': universe_name,
         'model': model_name,
         'selected_stocks': valid_syms,
         'stock_cagrs': stock_cagrs,
+        'weights': {valid_syms[i]: float(opt_w[i]) for i in range(len(valid_syms))},
+        'max_weight': max_w,
+        'min_weight': min_w,
+        'max_sector_weight': max_sec,
         'ew_cagr': float(ew_cagr),
         'opt_cagr': float(port_cagr),
         'opt_vol': float(port_vol),
