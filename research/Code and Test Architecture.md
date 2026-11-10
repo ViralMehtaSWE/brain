@@ -50,13 +50,25 @@ All files are stored in the Obsidian vault at:
   - Executes SLSQP Maximum Sharpe Ratio optimization under constraints ($w_i \in [2.5\%, 10.0\%]$, $\sum w_i = 100\%$).
   - Outputs `research/data/cross_universe_matrix_results.json`.
 - **[`portfolio_optimizer.py`](research/code/portfolio_optimizer.py):**
-  Stand-alone optimizer module implementing quadratic programming, risk-free rate adjustment ($R_f = 7\%$), and position boundary constraints.
+  Stand-alone optimizer module implementing:
+  - SLSQP Tangency (Maximum Sharpe Ratio) optimization under box constraints ($w_i \in [w_{\min}, w_{\max}]$, $\sum w_i = 1.0$)
+  - Equal Risk Contribution (Risk-Parity) optimization balancing individual asset variance contributions
+  - Turnover constraints and transaction cost modeling (15 bps per unit turnover)
+  - Strict Data Integrity: refuses synthetic data and raises ValueError if real price histories are missing.
 
 ---
 
-## 3. Unit Test Suite (93 Tests, 100% Passing)
+## 3. Unit Test Suite (124+ Tests, 100% Passing)
 
-The pipeline is verified by **9 test suites** containing 93 comprehensive unit tests:
+The pipeline is verified by comprehensive unit test suites running in ~40 seconds with zero network dependency:
+- **`test_master_audit_integrity.py`:** Enforces zero partial subsets, full universe coverage, weight conservation ($\sum w = 1.0$), and statistical factor significance ($p < 0.05$).
+- **`test_cross_universe_matrix.py`:** Validates dimensions (3x3), finite metric calculations, positive returns across all 9 combinations, and absence of look-ahead biases.
+- **`test_portfolio_optimizer.py`:** Tests SLSQP Sharpe maximization, Risk-Parity solver, weight boundaries, transaction costs, and money allocation conservation.
+- **`test_fundamental_alpha.py`:** Tests data sanitization, edge cases (zero denominators, negative earnings, negative net worth), and real data pipeline integration with ZERO synthetic data.
+- **`test_annual_rebalancing.py`:** Validates point-in-time annual rebalancing, portfolio turnover, and transaction costs.
+- **`test_multi_period_transferability.py`:** Validates 6 independent walk-forward periods.
+- **`test_nifty250_30stocks.py` & `test_portfolios_10_and_30.py`:** Verifies 10-stock and 30-stock portfolio bounds and sector limits.
+
 
 | Test File | Test Count | Scope & Invariants Tested |
 | :--- | :---: | :--- |
