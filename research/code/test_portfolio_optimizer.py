@@ -95,5 +95,24 @@ class TestPortfolioOptimizer(unittest.TestCase):
         self.assertEqual(len(result['allocations']), 2)
 
 
+    def test_risk_parity_and_transaction_costs(self):
+        cov = np.array([
+            [0.09, 0.01, 0.01],
+            [0.01, 0.04, 0.01],
+            [0.01, 0.01, 0.0225]
+        ])
+        rp_weights = self.optimizer.optimize_risk_parity(cov, min_weight=0.05, max_weight=0.70)
+        self.assertAlmostEqual(np.sum(rp_weights), 1.0, places=5)
+        # In risk-parity, lower-variance assets get higher weights
+        self.assertGreater(rp_weights[2], rp_weights[0])
+
+        # Test turnover and cost deduction
+        prior_w = np.array([0.33, 0.33, 0.34])
+        res_costs = self.optimizer.apply_turnover_and_costs(rp_weights, prior_weights=prior_w, max_turnover=0.50, cost_bps=15.0)
+        self.assertAlmostEqual(np.sum(res_costs['weights']), 1.0, places=5)
+        self.assertGreaterEqual(res_costs['turnover'], 0.0)
+        self.assertAlmostEqual(res_costs['cost_deduction'], res_costs['turnover'] * 0.0015, places=6)
+
 if __name__ == '__main__':
     unittest.main()
+
