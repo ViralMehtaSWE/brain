@@ -45,7 +45,7 @@ Below is the complete portfolio allocation for a **₹10 Lakh (₹1,000,000)** a
 
 | # | Symbol | Company Name | Index Origin | Industry | ROCE | 3Y Sales CAGR | Debt / Equity | CFO / PAT | P/E | Optimal Weight | ₹10 Lakhs Portfolio | ₹1 Crore Portfolio | Equal Weight (3.33%) |
 | :-: | :--- | :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| 1 | **MCX** | Multi Commodity Exchange Ltd. | Midcap 150 | Financial Services | 57.9% | 60.0% | 0.00 | 1.42 | 62.4 | **6.00%** | ₹60,000 | ₹6,00,000 | ₹33,333 |
+| 1 | **MCX** | Multi Commodity Exchange Ltd. | Midcap 150 | Financial Services | 71.4% | 60.0% | 0.00 | 2.28 | 50.2 | **5.98%** | ₹60,000 | ₹6,00,000 | ₹33,333 |
 | 2 | **NESTLEIND** | Nestle India Ltd. | Nifty 50 | FMCG | 70.0% | 11.0% | 0.09 | 1.44 | 63.0 | **6.00%** | ₹60,000 | ₹6,00,000 | ₹33,333 |
 | 3 | **COLPAL** | Colgate Palmolive (India) Ltd. | Midcap 150 | FMCG | 70.0% | 5.0% | 0.03 | 1.36 | 33.3 | **6.00%** | ₹60,000 | ₹6,00,000 | ₹33,333 |
 | 4 | **PAGEIND** | Page Industries Ltd. | Midcap 150 | Textiles | 64.4% | 4.0% | 0.18 | 1.04 | 51.9 | **6.00%** | ₹60,000 | ₹6,00,000 | ₹33,333 |
