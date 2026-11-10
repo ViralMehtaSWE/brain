@@ -17,8 +17,13 @@ from scipy.stats import spearmanr, ttest_1samp
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.inspection import permutation_importance
 
-SCRATCH_DIR = "/Users/viralmehta/.gemini/antigravity-cli/brain/7d4b83c2-c66a-4f9e-8a3b-9192a3ba2d22/scratch"
-CACHE_DIR = os.path.join(SCRATCH_DIR, "screener_cache")
+try:
+    from config import CACHE_DIR, DATA_DIR
+    SCRATCH_DIR = DATA_DIR
+except ImportError:
+    SCRATCH_DIR = "/Users/viralmehta/.gemini/antigravity-cli/brain/7d4b83c2-c66a-4f9e-8a3b-9192a3ba2d22/scratch"
+    CACHE_DIR = os.path.join(SCRATCH_DIR, "screener_cache")
+
 
 NEXT50_TICKERS = [
     "BEL", "HAL", "SIEMENS", "ABB", "HAVELLS", "POLYCAB", "BHARATFORG", 
