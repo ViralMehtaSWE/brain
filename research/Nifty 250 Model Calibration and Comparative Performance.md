@@ -1,3 +1,9 @@
+---
+permalink: obsidian/research/nifty-250-model-calibration-and-comparative-performance
+title: Nifty 250 Model Calibration and Comparative Performance
+type: note
+---
+
 # NIFTY 250 Model Calibration & 4-Model Comparative Performance Matrix
 
 **Date:** November 10, 2026  
