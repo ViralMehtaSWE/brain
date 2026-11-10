@@ -34,6 +34,9 @@ A personal knowledge management (PKM) vault and long-term semantic memory system
 | [cmux and Terminal CLI Integration.md](cmux%20and%20Terminal%20CLI%20Integration.md) | Shell wrappers and precmd hook setup for CLI permissions across cmux & iTerm2. |
 | [Viral Mehta.md](Viral%20Mehta.md) | Personal profile, career timeline (Stripe, Amazon, Google, Microsoft, incoming Staff SWE at LinkedIn), skills, and contact details. |
 | [Rahul Banerji.md](Rahul%20Banerji.md) | Contact note and relation record (best friend). |
+| [research/Master Methodological Audit and Quantitative Alpha Resolution.md](research/Master%20Methodological%20Audit%20and%20Quantitative%20Alpha%20Resolution.md) | Authoritative methodological audit, econometric resolutions, 124 passing unit tests, and complete code/data/research inventory for Indian Equities Quantitative Alpha. |
+| [research/Fundamental Alpha and Factor Transferability in Indian Equities.md](research/Fundamental%20Alpha%20and%20Factor%20Transferability%20in%20Indian%20Equities.md) | Master research paper on multi-factor fundamental alpha, Rank IC calibrations, and 3x3 cross-universe transferability across NIFTY 50, Next 50, and Midcap 150. |
+| [research/Reproduction Guide - Fundamental Alpha in Indian Equities.md](research/Reproduction%20Guide%20-%20Fundamental%20Alpha%20in%20Indian%20Equities.md) | Step-by-step terminal reproduction instructions for data ingestion, econometric calibration, and portfolio backtests. |
 
 ---
 
