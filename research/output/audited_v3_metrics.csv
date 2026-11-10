@@ -1,0 +1,6 @@
+,CAGR (%),Annual Vol (%),Sharpe Ratio,Sortino Ratio,Max Drawdown (%),Calmar Ratio,Annual Turnover (%),Trades/Year
+Model 1: Macro Consensus Rotator (Drift Net),14.21,16.71,0.53,0.75,-45.15,0.31,85.9,12.0
+Benchmark: Static 50/50 Net (Monthly Drift),14.22,15.41,0.56,0.78,-46.74,0.3,12.9,12.0
+Benchmark: 100% SPY Net TRI (INR),16.1,20.88,0.54,0.78,-41.51,0.39,0.0,0.0
+Benchmark: 100% SPY Gross TRI (INR),17.1,20.88,0.58,0.84,-41.11,0.42,0.0,0.0
+Benchmark: 100% Nifty 500 TRI (INR),11.39,18.86,0.36,0.5,-52.7,0.22,0.0,0.0

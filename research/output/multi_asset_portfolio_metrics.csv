@@ -1,0 +1,9 @@
+,CAGR (%),Annual Vol (%),Sharpe Ratio,Sortino Ratio,Max Drawdown (%),Calmar Ratio,Annual Turnover (%)
+1. Growth All-Weather (35 US / 35 India / 20 Gold / 10 Bond),14.83,11.79,0.74,1.05,-25.55,0.58,10.0
+2. Trend-Protected All-Weather (Growth + 200 SMA Cash Filter),9.51,9.12,0.4,0.55,-22.06,0.43,98.2
+3. Multi-Asset Risk Parity / ERC (Inverse-Vol Quarterly),12.03,9.19,0.65,0.94,-13.24,0.91,20.8
+4. Permanent Portfolio (25 US / 25 India / 25 Gold / 25 Bond),13.55,10.2,0.73,1.04,-17.14,0.79,10.5
+Benchmark: Static 50/50 Equity (US / India),15.4,15.3,0.63,0.88,-38.89,0.4,7.0
+Benchmark: 100% SPY Net TRI (INR),16.33,20.86,0.55,0.79,-37.58,0.43,0.0
+Benchmark: 100% Nifty 500 TRI (INR),13.03,18.44,0.44,0.61,-40.37,0.32,0.0
+Benchmark: 100% Gold (INR),14.05,19.33,0.48,0.68,-30.33,0.46,0.0

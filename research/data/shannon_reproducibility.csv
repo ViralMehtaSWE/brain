@@ -1,0 +1,3 @@
+,CAGR (%),Annual Vol (%),Sharpe Ratio,Sortino Ratio,Max Drawdown (%),Calmar Ratio,Annual Turnover (%),Total Trades
+"Shannon Demon (Zero-Lag, Frictionless)",22.32,16.84,0.93,1.35,-40.59,0.55,1667.1,1529.0
+Shannon Demon (Strict 1-Day Lag + 20 bps Fee),11.41,17.18,0.38,0.52,-41.16,0.28,1667.1,1529.0

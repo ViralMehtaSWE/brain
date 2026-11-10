@@ -1,0 +1,7 @@
+,CAGR (%),Annual Vol (%),Sharpe Ratio,Sortino Ratio,Max Drawdown (%),Calmar Ratio
+Model 1: Macro Consensus Rotator,14.8,16.63,0.56,0.54,-43.24,0.34
+Model 2: Vol-Targeted ERC (12% Vol),12.21,11.33,0.56,0.53,-28.02,0.44
+Model 3: CPPI Floor (80% Floor),11.11,9.3,0.55,0.53,-18.17,0.61
+Benchmark: 100% SPY TRI (INR),16.37,20.57,0.56,0.56,-40.67,0.4
+Benchmark: Static 50/50 TRI,14.54,15.16,0.59,0.56,-45.49,0.32
+Benchmark: 100% Nifty 500 TRI (INR),11.04,18.54,0.34,0.34,-52.7,0.21

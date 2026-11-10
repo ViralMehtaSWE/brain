@@ -17,8 +17,12 @@ import pandas as pd
 from scipy.optimize import minimize
 from typing import List, Dict, Any, Optional
 
-SCRATCH_DIR = "/Users/viralmehta/.gemini/antigravity-cli/brain/7d4b83c2-c66a-4f9e-8a3b-9192a3ba2d22/scratch"
-CACHE_DIR = os.path.join(SCRATCH_DIR, "screener_cache")
+try:
+    from config import CACHE_DIR, PRICES_DIR, UNIVERSE_CSV
+except ImportError:
+    SCRATCH_DIR = "/Users/viralmehta/.gemini/antigravity-cli/brain/7d4b83c2-c66a-4f9e-8a3b-9192a3ba2d22/scratch"
+    CACHE_DIR = os.path.join(SCRATCH_DIR, "screener_cache")
+
 
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
