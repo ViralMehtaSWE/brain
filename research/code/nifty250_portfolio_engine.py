@@ -322,6 +322,7 @@ class Nifty250PortfolioEngine:
         # Constraints: sum(w) == 1.0 and industry cap <= 25%
         constraints = [{'type': 'eq', 'fun': lambda w: np.sum(w) - 1.0}]
         
+        industries = candidate_df['Industry'].values if 'Industry' in candidate_df.columns else np.array(['General'] * K)
         unique_industries = np.unique(industries)
         for ind in unique_industries:
             ind_mask = (industries == ind).astype(float)
