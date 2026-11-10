@@ -181,27 +181,41 @@ def analyze_factors_and_derive_weights(panel_df, universe_name):
             'p_value': float(p_val)
         }
         
-    # Random Forest Regressor & Permutation Importance
-    X = clean_df[features]
-    y = clean_df['target_fwd_pat_cagr']
+    # Temporal Train/Test split for Random Forest to prevent in-sample overfitting
+    years_sorted = sorted(clean_df['year'].unique())
+    split_idx = max(1, int(len(years_sorted) * 0.7))
+    train_years = years_sorted[:split_idx]
+    test_years = years_sorted[split_idx:] if split_idx < len(years_sorted) else years_sorted
+
+    train_mask = clean_df['year'].isin(train_years)
+    test_mask = clean_df['year'].isin(test_years)
+
+    X_train, y_train = clean_df.loc[train_mask, features], clean_df.loc[train_mask, 'target_fwd_pat_cagr']
+    X_test, y_test = clean_df.loc[test_mask, features], clean_df.loc[test_mask, 'target_fwd_pat_cagr']
+
     rf = RandomForestRegressor(n_estimators=200, max_depth=4, random_state=42)
-    rf.fit(X, y)
-    perm = permutation_importance(rf, X, y, n_repeats=15, random_state=42)
+    rf.fit(X_train, y_train)
+    perm = permutation_importance(rf, X_test, y_test, n_repeats=15, random_state=42)
     
     for i, f in enumerate(features):
         stats[f]['rf_gini'] = float(rf.feature_importances_[i])
-        stats[f]['perm_imp'] = float(perm.importances_mean[i])
+        stats[f]['perm_imp'] = float(max(0.0, perm.importances_mean[i]))
         
-    # Unrounded Weights Derivation
-    # Directional adjustment: debt_to_equity and wc_days are penalized when high
+    # Unrounded Weights Derivation: strictly respect directional IC
+    # Factors with negative directional correlation are NOT rewarded with positive weight
     raw_w = {}
     for f in features:
         ic_sign = -1.0 if f in ['debt_to_equity', 'wc_days'] else 1.0
-        adj_ic = max(0.0, stats[f]['mean_ic'] * ic_sign)
-        gini = stats[f]['rf_gini']
-        raw_w[f] = 0.5 * adj_ic + 0.5 * gini
+        dir_ic = stats[f]['mean_ic'] * ic_sign
+        if dir_ic <= 0.0:
+            raw_w[f] = 0.0
+        else:
+            raw_w[f] = 0.5 * dir_ic + 0.5 * stats[f]['perm_imp']
         
     tot = sum(raw_w.values())
+    if tot == 0:
+        tot = 1.0
+        raw_w = {f: 1.0 / len(features) for f in features}
     unrounded_w = {f: raw_w[f] / tot for f in features}
     
     rounded_w = {f: round(unrounded_w[f], 3) for f in features}
