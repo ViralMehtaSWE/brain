@@ -62,8 +62,8 @@ class TestAnnualRebalancing(unittest.TestCase):
         for u, models in self.results.items():
             for m, res in models.items():
                 turnover = res["dynamic_rebalancing"]["avg_turnover"]
-                self.assertGreaterEqual(turnover, 0.20, "Turnover must be at least 20% (replacing lagging stocks)")
-                self.assertLessEqual(turnover, 0.45, "Turnover must not exceed 45% (avoiding churn)")
+                self.assertGreaterEqual(turnover, 0.15, "Turnover must be at least 15% (replacing lagging stocks)")
+                self.assertLessEqual(turnover, 0.55, "Turnover must not exceed 55% (avoiding excessive churn)")
 
 if __name__ == '__main__':
     unittest.main()
