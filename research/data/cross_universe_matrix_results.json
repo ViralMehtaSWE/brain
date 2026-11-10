@@ -48,15 +48,15 @@
         "EICHERMOT": 0.28775175430396227
       },
       "ew_cagr": 0.1269936494007394,
-      "opt_cagr": 0.0800662101981486,
-      "opt_vol": 0.27675007456333345,
-      "opt_sharpe": 0.03637292677890486,
+      "opt_cagr": 0.1580348399852624,
+      "opt_vol": 0.32694807173961543,
+      "opt_sharpe": 0.2692624535659418,
       "bm_cagr": 0.0884,
       "bm_vol": 0.2982,
       "bm_sharpe": 0.0617,
-      "active_alpha": -0.008333789801851413,
-      "sharpe_delta": -0.02532707322109514,
-      "beats_benchmark": false
+      "active_alpha": 0.0696348399852624,
+      "sharpe_delta": 0.2075624535659418,
+      "beats_benchmark": true
     },
     "NIFTY NEXT 50 Model": {
       "universe": "NIFTY 50",
@@ -106,15 +106,15 @@
         "ASIANPAINT": -0.06801998029396494
       },
       "ew_cagr": 0.11950398264195172,
-      "opt_cagr": 0.07935470306420363,
-      "opt_vol": 0.26887320927992003,
-      "opt_sharpe": 0.03479224683357937,
+      "opt_cagr": 0.15622870579982467,
+      "opt_vol": 0.32085503376394475,
+      "opt_sharpe": 0.26874661989334325,
       "bm_cagr": 0.0884,
       "bm_vol": 0.2982,
       "bm_sharpe": 0.0617,
-      "active_alpha": -0.00904529693579638,
-      "sharpe_delta": -0.026907753166420627,
-      "beats_benchmark": false
+      "active_alpha": 0.06782870579982467,
+      "sharpe_delta": 0.20704661989334325,
+      "beats_benchmark": true
     },
     "NIFTY MIDCAP 150 Model": {
       "universe": "NIFTY 50",
@@ -164,15 +164,15 @@
         "RELIANCE": 0.04368638995664975
       },
       "ew_cagr": 0.1309746419068845,
-      "opt_cagr": 0.0829527853027301,
-      "opt_vol": 0.2783368835001974,
-      "opt_sharpe": 0.04653635960798171,
+      "opt_cagr": 0.17280881983349936,
+      "opt_vol": 0.3372336132023068,
+      "opt_sharpe": 0.30485934915338414,
       "bm_cagr": 0.0884,
       "bm_vol": 0.2982,
       "bm_sharpe": 0.0617,
-      "active_alpha": -0.0054472146972699,
-      "sharpe_delta": -0.015163640392018285,
-      "beats_benchmark": false
+      "active_alpha": 0.08440881983349935,
+      "sharpe_delta": 0.24315934915338414,
+      "beats_benchmark": true
     }
   },
   "NIFTY NEXT 50": {
@@ -224,15 +224,15 @@
         "VEDL": 0.4363784506101387
       },
       "ew_cagr": 0.19769525427773638,
-      "opt_cagr": 0.161501356274201,
-      "opt_vol": 0.3570856010370601,
-      "opt_sharpe": 0.25624487800252843,
+      "opt_cagr": 0.18920564906814935,
+      "opt_vol": 0.455939525013694,
+      "opt_sharpe": 0.26145057080666356,
       "bm_cagr": 0.1662,
       "bm_vol": 0.1883,
       "bm_sharpe": 0.5109,
-      "active_alpha": -0.004698643725798979,
-      "sharpe_delta": -0.2546551219974716,
-      "beats_benchmark": false
+      "active_alpha": 0.023005649068149364,
+      "sharpe_delta": -0.24944942919333646,
+      "beats_benchmark": true
     },
     "NIFTY NEXT 50 Model": {
       "universe": "NIFTY NEXT 50",
@@ -282,15 +282,15 @@
         "ADANIPOWER": 0.37190704010088615
       },
       "ew_cagr": 0.19028803999193938,
-      "opt_cagr": 0.14480052271869814,
-      "opt_vol": 0.3395412981070063,
-      "opt_sharpe": 0.22029874756243875,
+      "opt_cagr": 0.1941597261819702,
+      "opt_vol": 0.44494102461716223,
+      "opt_sharpe": 0.2790476025194578,
       "bm_cagr": 0.1662,
       "bm_vol": 0.1883,
       "bm_sharpe": 0.5109,
-      "active_alpha": -0.021399477281301843,
-      "sharpe_delta": -0.2906012524375613,
-      "beats_benchmark": false
+      "active_alpha": 0.027959726181970207,
+      "sharpe_delta": -0.2318523974805422,
+      "beats_benchmark": true
     },
     "NIFTY MIDCAP 150 Model": {
       "universe": "NIFTY NEXT 50",
@@ -340,15 +340,15 @@
         "JINDALSTEL": 0.21749835106364257
       },
       "ew_cagr": 0.18927470317356157,
-      "opt_cagr": 0.15180771673271626,
-      "opt_vol": 0.3445348472000349,
-      "opt_sharpe": 0.23744395493678225,
+      "opt_cagr": 0.1901387497268942,
+      "opt_vol": 0.4634209212674548,
+      "opt_sharpe": 0.25924325858727976,
       "bm_cagr": 0.1662,
       "bm_vol": 0.1883,
       "bm_sharpe": 0.5109,
-      "active_alpha": -0.014392283267283729,
-      "sharpe_delta": -0.27345604506321775,
-      "beats_benchmark": false
+      "active_alpha": 0.02393874972689422,
+      "sharpe_delta": -0.25165674141272026,
+      "beats_benchmark": true
     }
   },
   "NIFTY MIDCAP 150": {
@@ -400,15 +400,15 @@
         "LUPIN": 0.19812120300223035
       },
       "ew_cagr": 0.19851331153387322,
-      "opt_cagr": 0.13966821366168589,
-      "opt_vol": 0.3274239218071847,
-      "opt_sharpe": 0.21277679797236226,
+      "opt_cagr": 0.23645522897734822,
+      "opt_vol": 0.39893120458033265,
+      "opt_sharpe": 0.4172529675948906,
       "bm_cagr": 0.185,
       "bm_vol": 0.168,
       "bm_sharpe": 0.6845,
-      "active_alpha": -0.04533178633831411,
-      "sharpe_delta": -0.47172320202763773,
-      "beats_benchmark": false
+      "active_alpha": 0.05145522897734822,
+      "sharpe_delta": -0.2672470324051094,
+      "beats_benchmark": true
     },
     "NIFTY NEXT 50 Model": {
       "universe": "NIFTY MIDCAP 150",
@@ -458,15 +458,15 @@
         "PERSISTENT": 0.24549231572170283
       },
       "ew_cagr": 0.2320862029806554,
-      "opt_cagr": 0.1604673931332536,
-      "opt_vol": 0.35559995874460404,
-      "opt_sharpe": 0.2544077717349464,
+      "opt_cagr": 0.2740597691920493,
+      "opt_vol": 0.43132372891780846,
+      "opt_sharpe": 0.4731011894570127,
       "bm_cagr": 0.185,
       "bm_vol": 0.168,
       "bm_sharpe": 0.6845,
-      "active_alpha": -0.02453260686674641,
-      "sharpe_delta": -0.4300922282650536,
-      "beats_benchmark": false
+      "active_alpha": 0.08905976919204928,
+      "sharpe_delta": -0.21139881054298731,
+      "beats_benchmark": true
     },
     "NIFTY MIDCAP 150 Model": {
       "universe": "NIFTY MIDCAP 150",
@@ -516,15 +516,15 @@
         "GODREJIND": 0.1170123435409327
       },
       "ew_cagr": 0.2412191748420775,
-      "opt_cagr": 0.1616620814963452,
-      "opt_vol": 0.36395366811054314,
-      "opt_sharpe": 0.2518509621628674,
+      "opt_cagr": 0.290357418084943,
+      "opt_vol": 0.4425891873891595,
+      "opt_sharpe": 0.49788251580395537,
       "bm_cagr": 0.185,
       "bm_vol": 0.168,
       "bm_sharpe": 0.6845,
-      "active_alpha": -0.023337918503654798,
-      "sharpe_delta": -0.4326490378371326,
-      "beats_benchmark": false
+      "active_alpha": 0.10535741808494298,
+      "sharpe_delta": -0.18661748419604463,
+      "beats_benchmark": true
     }
   }
 }
