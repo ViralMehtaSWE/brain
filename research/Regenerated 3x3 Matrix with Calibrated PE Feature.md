@@ -1,3 +1,9 @@
+---
+permalink: obsidian/research/regenerated-3x3-matrix-with-calibrated-pe-feature
+title: Regenerated 3x3 Matrix with Calibrated PE Feature
+type: note
+---
+
 # Regenerated 3x3 Cross-Universe Matrix with Empirically Calibrated P/E Feature
 
 **Date:** November 10, 2026  
