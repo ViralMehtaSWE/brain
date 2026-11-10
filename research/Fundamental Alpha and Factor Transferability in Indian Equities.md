@@ -77,21 +77,24 @@ To eliminate distortions from short-lived IPO honeymoon cycles, post-listing loc
 
 *(Tested over 3-Year Daily Price Series, Benchmark TRI CAGRs: Nifty 50 = 8.84%, Nifty Next 50 = 16.62%, Nifty Midcap 150 = 18.50%)*
 
-### Table A: Max-Sharpe Optimized 3-Year Annualized CAGR ($w_i \in [2.5\%, 10.0\%]$)
+### Table A: Empirically Calibrated 7-Factor Point-in-Time Rebalanced Matrix (with Explicit P/E Penalty)
 
-| Stock Universe | Benchmark 3Y CAGR | Applied NIFTY 50 Model | Applied NIFTY NEXT 50 Model | Applied NIFTY MIDCAP 150 Model |
+*(Annual walk-forward rebalanced portfolio, 20-stock selection, max 4 per sector, zero hindsight bias, benchmark TRI CAGRs: Nifty 50 = 8.84%, Nifty Next 50 = 16.62%, Nifty Midcap 150 = 18.50%)*
+
+| Stock Universe | Benchmark 3Y CAGR | Applied NIFTY 50 Model (7F) | Applied NIFTY NEXT 50 Model (7F) | Applied NIFTY MIDCAP 150 Model (7F) |
 | :--- | :---: | :---: | :---: | :---: |
-| **NIFTY 50** | **8.84%** | **20.62%** <br> *(+11.78% α)* | **22.13%** <br> *(+13.29% α)* | **22.71%** <br> *(+13.87% α)* |
-| **NIFTY NEXT 50** | **16.62%** | **24.61%** <br> *(+7.99% α)* | **26.07%** <br> *(+9.45% α)* | **26.72%** <br> *(+10.10% α)* |
-| **NIFTY MIDCAP 150** | **18.50%** | **42.34%** <br> *(+23.84% α)* | **46.58%** <br> *(+28.08% α)* | **46.42%** <br> *(+27.92% α)* |
+| **NIFTY 50** | **8.84%** | **28.20%** <br> *(+19.36% α)* | **27.09%** <br> *(+18.25% α)* | **26.13%** <br> *(+17.29% α)* |
+| **NIFTY NEXT 50** | **16.62%** | **32.69%** <br> *(+16.07% α)* | **34.47%** <br> *(+17.85% α)* | **31.78%** <br> *(+15.16% α)* |
+| **NIFTY MIDCAP 150** | **18.50%** | **47.93%** <br> *(+29.43% α)* | **45.23%** <br> *(+26.73% α)* | **39.87%** <br> *(+21.37% α)* |
 
 ### Table B: Equal-Weighted 20-Stock Basket 3-Year CAGR (Unbiased, 5% per stock)
 
 | Stock Universe | Benchmark 3Y CAGR | Applied NIFTY 50 Model | Applied NIFTY NEXT 50 Model | Applied NIFTY MIDCAP 150 Model |
 | :--- | :---: | :---: | :---: | :---: |
-| **NIFTY 50** | **8.84%** | **10.92%** <br> *(+2.08% α)* | **11.95%** <br> *(+3.11% α)* | **13.10%** <br> *(+4.26% α)* |
-| **NIFTY NEXT 50** | **16.62%** | **17.65%** <br> *(+1.03% α)* | **18.26%** <br> *(+1.64% α)* | **19.02%** <br> *(+2.40% α)* |
-| **NIFTY MIDCAP 150** | **18.50%** | **27.35%** <br> *(+8.85% α)* | **29.49%** <br> *(+10.99% α)* | **29.14%** <br> *(+10.64% α)* |
+| **NIFTY 50** | **8.84%** | **12.70%** <br> *(+3.86% α)* | **11.95%** <br> *(+3.11% α)* | **13.10%** <br> *(+4.26% α)* |
+| **NIFTY NEXT 50** | **16.62%** | **19.77%** <br> *(+3.15% α)* | **19.03%** <br> *(+2.41% α)* | **18.93%** <br> *(+2.31% α)* |
+| **NIFTY MIDCAP 150** | **18.50%** | **19.85%** <br> *(+1.35% α)* | **23.21%** <br> *(+4.71% α)* | **24.12%** <br> *(+5.62% α)* |
+
 
 ---
 
