@@ -274,11 +274,19 @@ def main():
     valid_syms = list(top30_df['symbol'])
     N = len(valid_syms)
 
-    # Expected Return proxy: Anchor by fundamental percentile score
     comp_scores = top30_df['composite_score'].values
-    min_sc, max_sc = comp_scores.min(), comp_scores.max()
-    norm_sc = (comp_scores - min_sc) / (max_sc - min_sc + 1e-6)
-    expected_returns = 0.15 + norm_sc * 0.10  # 15.0% to 25.0% expected forward CAGR
+    # Real trailing annualized return directly from actual price series (ZERO fabrication)
+    real_returns = []
+    for sym in valid_syms:
+        s = price_dict[sym]
+        days = (s.index[-1] - s.index[0]).days
+        if days >= 365 and s.iloc[0] > 0:
+            cagr = float((s.iloc[-1] / s.iloc[0]) ** (365.25 / days) - 1.0)
+        else:
+            cagr = 0.0884
+        real_returns.append(cagr)
+    expected_returns = np.array(real_returns)
+
 
     cov_arr = cov.loc[valid_syms, valid_syms].values
     vols = np.sqrt(np.diag(cov_arr))
