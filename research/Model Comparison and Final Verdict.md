@@ -1,3 +1,9 @@
+---
+permalink: obsidian/research/model-comparison-and-final-verdict
+title: Model Comparison and Final Verdict
+type: note
+---
+
 # Model Comparison and Final Verdict: Which Model is the Best and Why?
 
 **Date:** November 10, 2026  
