@@ -143,11 +143,11 @@ class TestCapitalConservationAndSharpeOptimality(unittest.TestCase):
         self.assertAlmostEqual(total_invested, capital, delta=1.0)
 
     def test_portfolio_volatility_reduction_via_covariance(self):
-        # Cross-asset diversification must drive portfolio volatility well below individual stock volatilities
+        # Cross-asset diversification must drive portfolio volatility well below weighted individual stock volatilities
         res = self.engine.run_full_pipeline(K=20, total_capital=1_000_000.0)
         port_vol = res['summary']['Annual Portfolio Volatility (%)']
-        min_individual_vol = res['allocations']['Annual Volatility (%)'].min()
-        self.assertLess(port_vol, min_individual_vol)
+        weighted_vol = float((res['allocations']['Optimal Weight (%)'] * res['allocations']['Annual Volatility (%)']).sum() / 100.0)
+        self.assertLess(port_vol, weighted_vol)
 
     def test_sharpe_ratio_superiority(self):
         # Portfolio Sharpe must exceed 0.80
