@@ -266,10 +266,14 @@ def evaluate_combination(universe_name, model_name, universe_df, model_weights):
     
     valid_syms = list(price_dict.keys())
     N = len(valid_syms)
-    mu_arr = np.array([ew_cagr if (s not in stock_cagrs or pd.isna(stock_cagrs[s])) else stock_cagrs[s] for s in valid_syms])
+    # Expected return is factor-implied (not ex-post realized!) to eliminate hindsight bias
+    # Higher fundamental score implies higher expected return prior to realization
+    scores = top20_df.set_index('symbol').loc[valid_syms, 'final_score'].values
+    score_pct = (pd.Series(scores).rank(pct=True).values)
+    rf = 0.07 # 7% Risk-Free Rate
+    mu_arr = rf + 0.08 * (0.8 + 0.4 * score_pct) # Base ERP 8% scaled by fundamental rank
     cov_arr = cov.loc[valid_syms, valid_syms].values
     
-    rf = 0.07 # 7% Risk-Free Rate
     def neg_sharpe(w):
         p_ret = np.dot(w, mu_arr)
         p_vol = np.sqrt(np.dot(w.T, np.dot(cov_arr, w)))
@@ -281,7 +285,9 @@ def evaluate_combination(universe_name, model_name, universe_df, model_weights):
     res_opt = minimize(neg_sharpe, init_w, method='SLSQP', bounds=bounds, constraints=cons)
     
     opt_w = res_opt.x if res_opt.success else init_w
-    port_cagr = float(np.dot(opt_w, mu_arr))
+    # Realized portfolio return is evaluated on actual realized holding period CAGRs
+    actual_cagrs = np.array([stock_cagrs.get(s, ew_cagr) for s in valid_syms])
+    port_cagr = float(np.dot(opt_w, actual_cagrs))
     port_vol = float(np.sqrt(np.dot(opt_w.T, np.dot(cov_arr, opt_w))))
     port_sharpe = float((port_cagr - rf) / port_vol) if port_vol > 0 else 0.0
     
