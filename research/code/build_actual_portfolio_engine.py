@@ -260,7 +260,7 @@ class ActualDataPortfolioEngine:
             elif len(s) > 10:
                 cagr = float(returns_df[sym].mean() * ann_factor)
             else:
-                cagr = 0.0884
+                raise ValueError(f"Stock {sym} has insufficient trading history ({len(s)} observations). Refusing to fabricate synthetic return.")
             real_returns.append(cagr)
         expected_returns = np.array(real_returns)
 
