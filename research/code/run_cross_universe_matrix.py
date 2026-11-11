@@ -321,13 +321,15 @@ def evaluate_combination(universe_name, model_name, universe_df, model_weights):
     port_series = (rel_prices * opt_w).sum(axis=1)
     days = (port_series.index[-1] - port_series.index[0]).days
 
-    # Net CAGR after deducting 15 bps execution friction
-    gross_cagr = float((port_series.iloc[-1]) ** (365.25 / days) - 1.0)
-    port_cagr = gross_cagr - 0.0015  # 15 bps transaction cost
+    # Net terminal wealth after deducting 15 bps one-time entry friction from initial capital V(t0) * (1 - 0.0015)
+    # Compounded annually over the 3-year holding horizon (1.0 / 3.0)
+    net_terminal_opt = (1.0 - 0.0015) * float(port_series.iloc[-1])
+    port_cagr = float(net_terminal_opt ** (1.0 / 3.0) - 1.0)
 
     # Equal-Weighted Portfolio Benchmark
     ew_series = (rel_prices * (1.0 / N)).sum(axis=1)
-    ew_cagr = float((ew_series.iloc[-1]) ** (365.25 / days) - 1.0) - 0.0015
+    net_terminal_ew = (1.0 - 0.0015) * float(ew_series.iloc[-1])
+    ew_cagr = float(net_terminal_ew ** (1.0 / 3.0) - 1.0)
 
     # Volatility and Sharpe Ratio
     port_daily_ret = port_series.pct_change().dropna()
