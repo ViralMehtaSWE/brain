@@ -28,11 +28,12 @@ from scipy.optimize import minimize
 
 # Portable paths via config
 try:
-    from config import CACHE_DIR, DATA_DIR, UNIVERSE_CSV, CALIBRATION_JSON, OUTPUT_DIR
+    from config import CACHE_DIR, DATA_DIR, UNIVERSE_CSV, CALIBRATION_JSON, OUTPUT_DIR, PRICE_10Y_DIR
     SCRATCH_DIR = DATA_DIR
 except ImportError:
     SCRATCH_DIR = "/Users/viralmehta/.brain/brain/research/data"
     CACHE_DIR = os.path.join(SCRATCH_DIR, "screener_cache")
+    PRICE_10Y_DIR = os.path.join(SCRATCH_DIR, "price_10y")
     UNIVERSE_CSV = os.path.join(SCRATCH_DIR, "nifty_250_universe.csv")
     CALIBRATION_JSON = os.path.join(SCRATCH_DIR, "audited_three_universes_calibration.json")
 
