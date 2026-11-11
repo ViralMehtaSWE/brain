@@ -426,10 +426,13 @@ def run_annual_rebalance_simulation():
                 r_stat_opt_gross = sum(curr_stat_w_opt.get(s, 0.0) * holding_rets_stat.get(s, 0.0) for s in static_top20)
                 r_stat_ew_gross = sum(curr_stat_w_ew.get(s, 0.0) * holding_rets_stat.get(s, 0.0) for s in static_top20)
 
-                friction_stat = 0.0015 if cycle_idx == 0 else 0.0
-
-                r_stat_opt = r_stat_opt_gross - friction_stat
-                r_stat_ew = r_stat_ew_gross - friction_stat
+                # 15 bps entry friction deducted from initial capital on Year 1
+                if cycle_idx == 0:
+                    r_stat_opt = (1.0 - 0.0015) * (1.0 + r_stat_opt_gross) - 1.0
+                    r_stat_ew = (1.0 - 0.0015) * (1.0 + r_stat_ew_gross) - 1.0
+                else:
+                    r_stat_opt = r_stat_opt_gross
+                    r_stat_ew = r_stat_ew_gross
 
                 stat_y_rets_opt.append(r_stat_opt)
                 stat_y_rets_ew.append(r_stat_ew)
