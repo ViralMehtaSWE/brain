@@ -268,6 +268,7 @@ def main():
             'total_constituents': len(symbols),
             'unique_stocks_in_panel': int(panel_df['symbol'].nunique()),
             'total_panel_observations': len(panel_df),
+            'pre_sample_panel_observations': int(panel_df['year'].apply(lambda y: int(y.split()[1]) <= 2020).sum()) if 'year' in panel_df.columns else 0,
             'factor_statistics': stats,
             'unrounded_weights': unrounded_w,
             'rounded_weights': rounded_w
