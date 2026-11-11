@@ -234,7 +234,7 @@ def build_portfolio(K, max_per_sector, min_w, max_w, max_sec_w, scored_df):
         if days >= 365 and s.iloc[0] > 0:
             cagr = float((s.iloc[-1] / s.iloc[0]) ** (365.25 / days) - 1.0)
         else:
-            cagr = 0.0884 # Default to official benchmark return if short
+            raise ValueError(f"Stock {sym} has insufficient trading history ({days} days). Refusing to fabricate synthetic return.")
         real_returns.append(cagr)
     expected_returns = np.array(real_returns)
 
