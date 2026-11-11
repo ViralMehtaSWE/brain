@@ -337,10 +337,8 @@ def run_annual_rebalance_simulation():
         rebalance_results[u] = {}
         print(f"\n==================== UNIVERSE: {u} ====================")
 
-        bm_cagr = BENCHMARK_ANNUAL_CAGRS[u]
-        bm_y_rets = BENCHMARK_YEARLY_RETURNS[u]
+        bm_y_rets, bm_cum, bm_cagr = get_benchmark_annual_path(u)
         bm_y1, bm_y2, bm_y3 = bm_y_rets[0], bm_y_rets[1], bm_y_rets[2]
-        bm_cum = (1 + bm_y1) * (1 + bm_y2) * (1 + bm_y3) - 1.0
 
         for m_name, m_weights in MODELS.items():
             drifted_dyn_opt = None
