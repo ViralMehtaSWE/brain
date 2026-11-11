@@ -228,7 +228,10 @@ def evaluate_universe(index_name: str, weights: Dict[str, float], K: int = 20, c
     for sym in valid_symbols:
         s = price_dict[sym]
         days = (s.index[-1] - s.index[0]).days
-        c = float((s.iloc[-1] / s.iloc[0]) ** (365.25 / days) - 1.0) if days >= 365 and s.iloc[0] > 0 else 0.0884
+        if days >= 365 and s.iloc[0] > 0:
+            c = float((s.iloc[-1] / s.iloc[0]) ** (365.25 / days) - 1.0)
+        else:
+            raise ValueError(f"Stock {sym} has insufficient trading history ({days} days). Refusing to fabricate synthetic return.")
         real_returns.append(c)
     exp_returns = np.array(real_returns)
 
