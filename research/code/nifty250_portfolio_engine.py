@@ -315,7 +315,8 @@ class Nifty250PortfolioEngine:
             )
 
         prices_df = pd.DataFrame(price_dict).pct_change(fill_method=None).dropna(how='all')
-        cov = prices_df.cov() * 252.0
+        ann_factor = 52.0 if len(prices_df) < 180 else 252.0
+        cov = prices_df.cov() * ann_factor
         cov = cov.fillna(cov.median().median() if not cov.empty else 0.04)
 
         valid_syms = [s for s in candidate_df['Symbol'] if s in price_dict]
