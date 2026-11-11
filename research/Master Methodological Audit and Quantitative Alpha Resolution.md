@@ -139,7 +139,36 @@ All production files reside in `~/.brain/brain/research/code/` and are fully syn
 
 ---
 
-## 6. Reproduction Commands
+## 6. Structural & Methodological Nuances
+
+To maintain institutional auditability, four mathematical and dataset structures are formally documented:
+
+1. **Exact 0.00 bps Convergence of Static 3Y CAGRs**:
+   - Both [`run_cross_universe_matrix.py`](code/run_cross_universe_matrix.py) and [`run_annual_rebalance_simulation.py`](code/run_annual_rebalance_simulation.py) align on:
+     - Deducting the one-time 15 bps entry friction directly from initial portfolio wealth: $V(t_0) = 1.0 \times (1 - 0.0015) = 0.9985$.
+     - Evaluating terminal holdings on the identical market close (`2026-11-09`).
+     - Compounding with the exact 3-year annualization exponent: $(V(T) / V(t_0))^{1/3} - 1$.
+   - As a result, the Static 3Y CAGRs across both engines converge identically to **0.00000 bps** across all nine matrix cells.
+
+2. **Split- and Bonus-Adjusted Point-in-Time Trailing P/E**:
+   - Primary valuation computes split-invariant market cap at $t_0$:
+     $$\text{Market Cap}(t_0) = P(t_0) \times \left(\frac{\text{Market Cap}_{\text{latest}}}{P_{\text{latest}}}\right)$$
+     $$\text{Trailing P/E}(t_0) = \frac{\text{Market Cap}(t_0)}{\text{PAT}(t_0)}$$
+   - In fallback scenarios using $P(t_0) / \text{EPS}(t_0)$, $\text{EPS}$ is scaled by historical equity capital ratio:
+     $$\text{Adjusted EPS}(t_0) = \text{EPS}(t_0) \times \left(\frac{\text{Equity Capital}(t_0)}{\text{Equity Capital}_{\text{latest}}}\right)$$
+     preventing post-2023 corporate actions (splits, bonus shares) from artificially depressing historical valuation ratios.
+
+3. **Temporal Partitioning: Pre-Sample Calibration vs. Longitudinal Panel Statistics**:
+   - Factor weight calibration and Random Forest feature importances in [`run_complete_three_universe_audit.py`](code/run_complete_three_universe_audit.py) are strictly isolated to pre-sample periods ($t \le 2020$) with an explicit 3-year embargo between training and test sets.
+   - Descriptive summary fields (`total_panel_observations` = 252, 207, 658) in [`audited_three_universes_calibration.json`](data/audited_three_universes_calibration.json) document the full 6-year longitudinal panel across all reporting periods, while `pre_sample_panel_observations` (123, 93, 299) documents the pre-sample estimation slice.
+
+4. **Constituent Roster Survivorship Considerations**:
+   - Point-in-time fundamentals (`Mar 2023`, `Mar 2024`, `Mar 2025`) and trailing prices are free of look-ahead bias.
+   - The candidate universe [`nifty_250_universe.csv`](data/nifty_250_universe.csv) reflects official NSE index memberships. Stocks delisted prior to 2026 are absent, while recent additions are present.
+
+---
+
+## 7. Reproduction Commands
 
 To replicate all audited results offline:
 
