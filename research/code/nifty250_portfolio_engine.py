@@ -227,11 +227,28 @@ class Nifty250PortfolioEngine:
         df['Fundamental_Score'] = (raw_score.rank(pct=True) * 100).round(1)
         return df.sort_values(by='Fundamental_Score', ascending=False).reset_index(drop=True)
 
+    @staticmethod
+    def has_valid_price_history(sym: str, min_days: int = 365) -> bool:
+        """Checks if a stock has authentic price history covering at least min_days."""
+        t_clean = 'TATAMOTORS' if sym in ['TMPV', 'TMCV'] else sym.upper().strip()
+        p_file = os.path.join(CACHE_DIR, f"{t_clean}_price.csv")
+        if not os.path.exists(p_file):
+            return False
+        try:
+            df_p = pd.read_csv(p_file, parse_dates=['date'])
+            if len(df_p) < 20:
+                return False
+            days = (df_p['date'].max() - df_p['date'].min()).days
+            return days >= min_days
+        except Exception:
+            return False
+
     def select_diversified_candidates(self, scored_df: pd.DataFrame, K: int = 20) -> pd.DataFrame:
         """
         Selects K stocks (15 <= K <= 25) enforcing adequate sector diversification.
         - No more than 3-4 stocks from any single industry sector.
         - Spans at least 7 distinct industry sectors.
+        - Verifies authentic price history (>= 365 days) to avoid synthetic data.
         """
         assert 15 <= K <= 25, f"K must be between 15 and 25 for adequate diversification. Received K={K}."
         
@@ -240,6 +257,8 @@ class Nifty250PortfolioEngine:
         sector_counts = {}
 
         for _, row in scored_df.iterrows():
+            if not self.has_valid_price_history(row['Symbol']):
+                continue
             sec = row['Industry']
             curr_count = sector_counts.get(sec, 0)
             if curr_count < max_per_sector:
@@ -250,8 +269,14 @@ class Nifty250PortfolioEngine:
 
         # Fallback if sector limit was too strict
         if len(selected) < K:
-            remaining = [r for _, r in scored_df.iterrows() if r['Symbol'] not in [x['Symbol'] for x in selected]]
-            selected.extend(remaining[:K - len(selected)])
+            for _, r in scored_df.iterrows():
+                if r['Symbol'] in [x['Symbol'] for x in selected]:
+                    continue
+                if not self.has_valid_price_history(r['Symbol']):
+                    continue
+                selected.append(r)
+                if len(selected) == K:
+                    break
 
         selected_df = pd.DataFrame(selected).reset_index(drop=True)
         return selected_df
