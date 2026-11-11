@@ -200,12 +200,18 @@ def get_point_in_time_features(sym, yr_target):
     mc_cr = clean_num(m_mc.group(1)) if m_mc else None
     cp = clean_num(m_cp.group(1)) if m_cp else None
 
+    bs_periods = [p for p in bs.keys() if bs[p].get('Equity Capital') is not None]
+    latest_eq = bs.get(bs_periods[-1], {}).get('Equity Capital') if bs_periods else eq
+    adj_factor = (eq / latest_eq) if (latest_eq and latest_eq > 0 and eq and eq > 0) else 1.0
+
     if mc_cr and cp and cp > 0 and pat and pat > 0 and p0 and p0 > 0:
         shares_cr = mc_cr / cp
         mc_t0 = p0 * shares_cr
         pe_val = float(mc_t0 / pat)
     elif p0 is not None and pd.notnull(p0) and p0 > 0 and eps is not None and pd.notnull(eps) and eps > 0:
-        pe_val = float(p0 / eps)
+        # Split/bonus-adjusted EPS using historical equity capital ratio
+        adj_eps = eps * adj_factor
+        pe_val = float(p0 / adj_eps)
     else:
         pe_val = 25.0
 
