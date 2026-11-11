@@ -52,18 +52,18 @@ tags:
 
 | Target Universe | Model Weights Applied | Net Opt CAGR | Equal-Weight CAGR | Portfolio Sharpe | Benchmark CAGR | Active Alpha | Benchmark Verdict |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **NIFTY 50** | **NIFTY 50 Model** | **14.33%** | 14.45% | 0.46 | 8.84% | **+5.49%** | ✅ **BEATS BENCHMARK** |
-| **NIFTY 50** | **NIFTY NEXT 50 Model** | **13.99%** | 13.95% | 0.44 | 8.84% | **+5.15%** | ✅ **BEATS BENCHMARK** |
-| **NIFTY 50** | **NIFTY MIDCAP 150 Model** | **13.94%** | 13.97% | 0.45 | 8.84% | **+5.10%** | ✅ **BEATS BENCHMARK** |
-| **NIFTY NEXT 50** | **NIFTY 50 Model** | **21.83%** | 22.22% | 0.71 | 16.62% | **+5.21%** | ✅ **BEATS BENCHMARK** |
-| **NIFTY NEXT 50** | **NIFTY NEXT 50 Model** | **21.85%** | 22.28% | 0.70 | 16.62% | **+5.23%** | ✅ **BEATS BENCHMARK** |
-| **NIFTY NEXT 50** | **NIFTY MIDCAP 150 Model** | **27.49%** | 25.53% | 0.90 | 16.62% | **+10.87%** | ✅ **BEATS BENCHMARK** |
-| **NIFTY MIDCAP 150** | **NIFTY 50 Model** | **22.23%** | 20.28% | 0.72 | 18.50% | **+3.73%** | ✅ **BEATS BENCHMARK** |
-| **NIFTY MIDCAP 150** | **NIFTY NEXT 50 Model** | **23.74%** | 21.12% | 0.80 | 18.50% | **+5.24%** | ✅ **BEATS BENCHMARK** |
-| **NIFTY MIDCAP 150** | **NIFTY MIDCAP 150 Model** | **25.18%** | 24.78% | 0.84 | 18.50% | **+6.68%** | ✅ **BEATS BENCHMARK** |
+| **NIFTY 50** | **NIFTY 50 Model** | **14.38%** | 14.51% | 0.46 | 8.84% | **+5.54%** | ✅ **BEATS BENCHMARK** |
+| **NIFTY 50** | **NIFTY NEXT 50 Model** | **14.05%** | 14.00% | 0.45 | 8.84% | **+5.21%** | ✅ **BEATS BENCHMARK** |
+| **NIFTY 50** | **NIFTY MIDCAP 150 Model** | **13.99%** | 14.03% | 0.45 | 8.84% | **+5.15%** | ✅ **BEATS BENCHMARK** |
+| **NIFTY NEXT 50** | **NIFTY 50 Model** | **21.86%** | 22.25% | 0.71 | 16.62% | **+5.24%** | ✅ **BEATS BENCHMARK** |
+| **NIFTY NEXT 50** | **NIFTY NEXT 50 Model** | **21.88%** | 22.31% | 0.70 | 16.62% | **+5.26%** | ✅ **BEATS BENCHMARK** |
+| **NIFTY NEXT 50** | **NIFTY MIDCAP 150 Model** | **27.50%** | 25.55% | 0.90 | 16.62% | **+10.88%** | ✅ **BEATS BENCHMARK** |
+| **NIFTY MIDCAP 150** | **NIFTY 50 Model** | **22.25%** | 20.31% | 0.72 | 18.50% | **+3.75%** | ✅ **BEATS BENCHMARK** |
+| **NIFTY MIDCAP 150** | **NIFTY NEXT 50 Model** | **23.76%** | 21.15% | 0.80 | 18.50% | **+5.26%** | ✅ **BEATS BENCHMARK** |
+| **NIFTY MIDCAP 150** | **NIFTY MIDCAP 150 Model** | **25.20%** | 24.79% | 0.84 | 18.50% | **+6.70%** | ✅ **BEATS BENCHMARK** |
 
 > [!success] 100% Outperformance Across All Regimes
-> All nine combinations beat their respective benchmark index under true out-of-sample forward holding without peering into future returns. Active alpha ranges from **+3.73% to +10.87%** per annum. All individual stock weights satisfy $w_i \in [2.5\%, 8.0\%]$ and all sectors satisfy $\le 25.0\%$.
+> All nine combinations beat their respective benchmark index under true out-of-sample forward holding without peering into future returns. Active alpha ranges from **+3.75% to +10.88%** per annum. All individual stock weights satisfy $w_i \in [2.5\%, 8.0\%]$ and all sectors satisfy $\le 25.0\%$.
 
 ---
 
@@ -74,15 +74,15 @@ tags:
 
 | Target Universe | Model Weights Applied | Dynamic Opt CAGR | Dynamic EW CAGR | Static 3Y CAGR | Benchmark CAGR | Dynamic Active Alpha | Outperformance vs Static |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **NIFTY 50** | **NIFTY 50 Model** | **14.58%** | 14.69% | 14.40% | 8.84% | **+5.74%** | **+0.18% over Static** |
-| **NIFTY 50** | **NIFTY NEXT 50 Model** | **15.21%** | 15.19% | 14.06% | 8.84% | **+6.37%** | **+1.14% over Static** |
-| **NIFTY 50** | **NIFTY MIDCAP 150 Model** | **12.06%** | 11.74% | 14.01% | 8.84% | **+3.22%** | **-1.95% vs Static** |
-| **NIFTY NEXT 50** | **NIFTY 50 Model** | **24.25%** | 23.17% | 21.88% | 16.62% | **+7.63%** | **+2.37% over Static** |
-| **NIFTY NEXT 50** | **NIFTY NEXT 50 Model** | **27.02%** | 26.45% | 21.90% | 16.62% | **+10.40%** | **+5.13% over Static** |
-| **NIFTY NEXT 50** | **NIFTY MIDCAP 150 Model** | **26.21%** | 24.86% | 27.52% | 16.62% | **+9.59%** | **-1.31% vs Static** |
-| **NIFTY MIDCAP 150** | **NIFTY 50 Model** | **30.65%** | 29.19% | 22.28% | 18.50% | **+12.15%** | **+8.37% over Static** |
-| **NIFTY MIDCAP 150** | **NIFTY NEXT 50 Model** | **28.90%** | 27.08% | 23.78% | 18.50% | **+10.40%** | **+5.12% over Static** |
-| **NIFTY MIDCAP 150** | **NIFTY MIDCAP 150 Model** | **22.13%** | 20.82% | 25.22% | 18.50% | **+3.63%** | **-3.09% vs Static** |
+| **NIFTY 50** | **NIFTY 50 Model** | **14.58%** | 14.69% | 14.38% | 8.84% | **+5.74%** | **+0.20% over Static** |
+| **NIFTY 50** | **NIFTY NEXT 50 Model** | **15.21%** | 15.19% | 14.05% | 8.84% | **+6.37%** | **+1.16% over Static** |
+| **NIFTY 50** | **NIFTY MIDCAP 150 Model** | **12.06%** | 11.74% | 13.99% | 8.84% | **+3.22%** | **-1.93% vs Static** |
+| **NIFTY NEXT 50** | **NIFTY 50 Model** | **24.25%** | 23.17% | 21.86% | 16.62% | **+7.63%** | **+2.39% over Static** |
+| **NIFTY NEXT 50** | **NIFTY NEXT 50 Model** | **27.02%** | 26.45% | 21.88% | 16.62% | **+10.40%** | **+5.14% over Static** |
+| **NIFTY NEXT 50** | **NIFTY MIDCAP 150 Model** | **26.21%** | 24.86% | 27.50% | 16.62% | **+9.59%** | **-1.29% vs Static** |
+| **NIFTY MIDCAP 150** | **NIFTY 50 Model** | **30.65%** | 29.19% | 22.25% | 18.50% | **+12.15%** | **+8.40% over Static** |
+| **NIFTY MIDCAP 150** | **NIFTY NEXT 50 Model** | **28.90%** | 27.08% | 23.76% | 18.50% | **+10.40%** | **+5.14% over Static** |
+| **NIFTY MIDCAP 150** | **NIFTY MIDCAP 150 Model** | **22.13%** | 20.82% | 25.20% | 18.50% | **+3.63%** | **-3.07% vs Static** |
 
 ---
 

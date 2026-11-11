@@ -3,6 +3,7 @@
     "total_constituents": 50,
     "unique_stocks_in_panel": 45,
     "total_panel_observations": 252,
+    "pre_sample_panel_observations": 123,
     "factor_statistics": {
       "cfo_to_pat": {
         "mean_ic": 0.22626863157931798,
@@ -74,6 +75,7 @@
     "total_constituents": 50,
     "unique_stocks_in_panel": 38,
     "total_panel_observations": 207,
+    "pre_sample_panel_observations": 93,
     "factor_statistics": {
       "cfo_to_pat": {
         "mean_ic": 0.0467517033495094,
@@ -145,6 +147,7 @@
     "total_constituents": 150,
     "unique_stocks_in_panel": 133,
     "total_panel_observations": 658,
+    "pre_sample_panel_observations": 299,
     "factor_statistics": {
       "cfo_to_pat": {
         "mean_ic": 0.17277280859094382,
