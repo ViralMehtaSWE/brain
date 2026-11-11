@@ -289,7 +289,7 @@ class Nifty250PortfolioEngine:
                 f"Real price data required; synthetic data generation is forbidden."
             )
 
-        prices_df = pd.DataFrame(price_dict).pct_change().dropna(how='all')
+        prices_df = pd.DataFrame(price_dict).pct_change(fill_method=None).dropna(how='all')
         cov = prices_df.cov() * 252.0
         cov = cov.fillna(cov.median().median() if not cov.empty else 0.04)
 
